@@ -4,8 +4,9 @@ import React, { useState } from "react";
 const FullPageLayout = () => {
     // State to store selected values from dropdowns
     const [formData, setFormData] = useState({
-        dropdown1: "",
-        dropdown2: "",
+        role: "",
+        competency: "",
+        bar:""
     });
 
     // Handle change in dropdown values
@@ -26,13 +27,14 @@ const FullPageLayout = () => {
     return (
         <div className="flex h-screen m-[24px]">
             {/* Left Section - Image */}
-            <div className="w-1/2 h-full">
-                <img
-                    src="image (10).webp"
-                    alt="Left Half"
-                    className="w-full h-full object-cover rounded-[30px]"
-                />
-            </div>
+            <div className="hidden md:block w-1/2 h-full">
+  <img
+    src="image (10).webp"
+    alt="Left Half"
+    className="w-full h-full object-cover rounded-[30px]"
+  />
+</div>
+
 
             {/* Right Section - Form */}
             <div className="w-1/2 flex flex-col  p-6">
@@ -46,14 +48,14 @@ const FullPageLayout = () => {
                             htmlFor="dropdown1"
                             className="block text-sm font-semibold text-gray-700 mb-2"
                         >
-                            Select Your Competency
+                            Select Your Role
                         </label>
                         <select
-                            id="dropdown2"
-                            name="dropdown2"
-                            value={formData.dropdown2}
+                            id="role"
+                            name="role"
+                            value={formData.role}
                             onChange={handleChange}
-                            className="w-1/2 px-2 bg-red-200 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
+                            className="w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
                         >
                             <option value="">Choose an option</option>
                             <option value="option1">Option 1</option>
@@ -70,11 +72,11 @@ const FullPageLayout = () => {
                             Select Your Competency
                         </label>
                         <select
-                            id="dropdown2"
-                            name="dropdown2"
-                            value={formData.dropdown2}
+                            id="competency"
+                            name="competency"
+                            value={formData.competency}
                             onChange={handleChange}
-                            className="w-1/2 px-2 bg-red-200 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
+                            className="w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
                         >
                             <option value="">Choose an option</option>
                             <option value="option1">Option 1</option>
@@ -85,15 +87,15 @@ const FullPageLayout = () => {
 
                     <div>
                         <label
-                            htmlFor="dropdown2"
+                            htmlFor="bar"
                             className="block text-sm font-semibold text-gray-700 mb-2"
                         >
                             Select Bar
                         </label>
                         <select
-                            id="dropdown2"
-                            name="dropdown2"
-                            value={formData.dropdown2}
+                            id="bat"
+                            name="bar"
+                            value={formData.bar}
                             onChange={handleChange}
                             className="w-1/2 p-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
                         >
