@@ -1,6 +1,8 @@
 'use client'
 import React from "react";
-import Select from 'react-select'; // Import react-select
+import dynamic from "next/dynamic";
+
+const Select = dynamic(() => import("react-select"), { ssr: false });
 
 interface Option {
   value: string;
