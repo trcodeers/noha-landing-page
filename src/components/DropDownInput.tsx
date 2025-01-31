@@ -15,10 +15,11 @@ interface DropdownProps {
     placeholder?: string;
     onChange: (value: string) => void;
     value: string;
+    width?: string; // Add the width prop
 }
 
 
-const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, placeholder = "Select an option", onChange, value }) => {
+const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, placeholder = "Select an option", onChange, value, width = 'w-3/4 md:w-1/2' }) => {
     const customStyles = {
         control: (styles: any) => ({
           ...styles,
@@ -42,7 +43,6 @@ const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, pla
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          width: '1.25rem',
           height: '1.25rem',
         }),
         option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => ({
@@ -62,7 +62,7 @@ const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, pla
   const selectedOption = value ? options.find(option => option.value === value) : null;
 
   return (
-    <div>
+    <div className={width}>
       <label htmlFor={label} className="block text-sm font-semibold text-gray-700 mb-2"> 
         {label}
       </label>
