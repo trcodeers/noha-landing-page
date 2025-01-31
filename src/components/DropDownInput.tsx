@@ -8,15 +8,17 @@ interface Option {
 }
 
 interface DropdownProps {
-  options: Option[];
-  label: string;
-  placeholder?: string;
-  onChange: (value: string) => void;
-  value: string;
+    id: string,
+    name: string
+    options: Option[];
+    label: string;
+    placeholder?: string;
+    onChange: (value: string) => void;
+    value: string;
 }
 
 
-const CustomDropdown: React.FC<DropdownProps> = ({ options, label, placeholder = "Select an option", onChange, value }) => {
+const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, placeholder = "Select an option", onChange, value }) => {
     const customStyles = {
         control: (styles: any) => ({
           ...styles,
@@ -65,7 +67,8 @@ const CustomDropdown: React.FC<DropdownProps> = ({ options, label, placeholder =
         {label}
       </label>
       <Select
-        id={label.toLowerCase()} // id is now dynamic
+        id={id} 
+        name={name}
         classNamePrefix="my-select"
         options={options}
         styles={customStyles}
