@@ -27,14 +27,14 @@ const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, pla
           borderRadius: '9999px',
           border: '1px solid #d3d3d3',
           paddingLeft: '1rem',
-          paddingRight: '2.5rem',
+          paddingRight: '1rem',
           boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
           height: '2.75rem', // Adjust height to match your original select
         }),
         indicatorSeparator: (styles: any) => ({ display: 'none' }),
         dropdownIndicator: (styles: any) => ({
           ...styles,
-          paddingRight: '10px',
+        //   paddingRight: '5px',
           color: '#808080',
           svg: {
             display: 'none',
