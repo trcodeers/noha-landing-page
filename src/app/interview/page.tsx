@@ -72,24 +72,7 @@ const FullPageLayout = () => {
                 </h1>
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
-                    {/* Select Role */}
-                    {/* <div>
-                        <label htmlFor="role" className="block text-sm font-semibold text-gray-700 mb-2">
-                            Select Your Role
-                        </label>
-                        <select
-                            id="role"
-                            name="role"
-                            value={formData.role}
-                            onChange={handleChange}
-                            className="w-3/4 md:w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
-                        >
-                            <option value="">Choose an option</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                        </select>
-                    </div> */}
+                   
                     <CustomDropdown
                         id="role"
                         name="role"
@@ -101,26 +84,6 @@ const FullPageLayout = () => {
                         width="md:w-1/2 sm:w-full" 
                     />
 
-                    {/* Select Competency */}
-                    {/* <div>
-                        <label htmlFor="competency" className="block text-sm font-semibold text-gray-700 mb-2">
-                            Select Your Competency
-                        </label>
-                        <select
-                            id="competency"
-                            name="competency"
-                            value={formData.competency}
-                            onChange={handleChange}
-                            className="w-3/4 md:w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
-                        >
-                            <option value="">Choose an option</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                        </select>
-                    </div>
-                     */}
-
                     <CustomDropdown
                         id="competency"
                         name="competency"
@@ -131,25 +94,6 @@ const FullPageLayout = () => {
                         onChange={(value: string) => setFormData({ ...formData, competency: value })}
                         width="md:w-1/2 sm:w-full" 
                     />
-
-                    {/* Select Bar */}
-                    {/* <div>
-              <label htmlFor="bar" className="block text-sm font-semibold text-gray-700 mb-2">
-                Select Bar
-              </label>
-              <select
-                id="bar"
-                name="bar"
-                value={formData.bar}
-                onChange={handleChange}
-                className="w-3/4 md:w-1/2 p-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
-              >
-                <option value="">Choose an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </select>
-            </div> */}
 
                     <CustomDropdown
                         id="bar"
@@ -173,8 +117,6 @@ const FullPageLayout = () => {
                 </form>
             </div>
         </div>
-
-
     );
 };
 
