@@ -63,7 +63,7 @@ const CustomDropdown: React.FC<DropdownProps> = ({ id, name, options, label, pla
 
   return (
     <div>
-      <label htmlFor={label.toLowerCase()} className="block text-sm font-semibold text-gray-700 mb-2"> {/* htmlFor now dynamic */}
+      <label htmlFor={label} className="block text-sm font-semibold text-gray-700 mb-2"> 
         {label}
       </label>
       <Select
