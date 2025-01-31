@@ -1,5 +1,5 @@
 'use client'
-import DropInput from "@/components/dropinput";
+// import DropInput from "@/components/dropinput";
 import React, { useState } from "react";
 
 const FullPageLayout = () => {
@@ -29,6 +29,7 @@ const FullPageLayout = () => {
         <div className="flex h-screen m-[24px]">
         {/* Left Section - Image (Hidden on Small Screens) */}
         <div className="hidden md:block w-1/2 h-full">
+            <div className="w-[26px] h-[26px] bg-[#D9D9D9] rounded-full absolute top-[44px] left-[46px]"></div>
           <img
             src="image (10).webp"
             alt="Left Half"
