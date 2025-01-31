@@ -6,7 +6,7 @@ const FullPageLayout = () => {
     const [formData, setFormData] = useState({
         role: "",
         competency: "",
-        bar:""
+        bar: ""
     });
 
     // Handle change in dropdown values
@@ -28,12 +28,12 @@ const FullPageLayout = () => {
         <div className="flex h-screen m-[24px]">
             {/* Left Section - Image */}
             <div className="hidden md:block w-1/2 h-full">
-  <img
-    src="image (10).webp"
-    alt="Left Half"
-    className="w-full h-full object-cover rounded-[30px]"
-  />
-</div>
+                <img
+                    src="image (10).webp"
+                    alt="Left Half"
+                    className="w-full h-full object-cover rounded-[30px]"
+                />
+            </div>
 
 
             {/* Right Section - Form */}
@@ -117,6 +117,8 @@ const FullPageLayout = () => {
                     </div>
                 </form>
             </div>
+
+            
         </div>
     );
 };
