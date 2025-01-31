@@ -1,6 +1,12 @@
 'use client'
+import CustomDropdown from "@/components/DropDownInput";
 // import DropInput from "@/components/dropinput";
 import React, { useState } from "react";
+
+interface Option {
+    value: string;
+    label: string;
+}
 
 const FullPageLayout = () => {
     // State to store selected values from dropdowns
@@ -25,65 +31,107 @@ const FullPageLayout = () => {
         console.log("Form Data Submitted:", formData);
     };
 
+
+    const barOptions: Option[] = [ // New options for Bar
+        { value: "", label: "Choose an option" },
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2" },
+        { value: "option3", label: "Option 3" },
+    ];
+
+    const competencyOptions: Option[] = [
+        { value: "", label: "Choose an option" },
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2" },
+        { value: "option3", label: "Option 3" },
+    ]
+
+    const roleOptions: Option[] = [
+        { value: "", label: "Choose an option" },
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2" },
+        { value: "option3", label: "Option 3" },
+    ]
+
     return (
         <div className="flex h-screen m-[24px]">
-        {/* Left Section - Image (Hidden on Small Screens) */}
-        <div className="hidden md:block w-1/2 h-full">
-            <div className="w-[26px] h-[26px] bg-[#D9D9D9] rounded-full absolute top-[44px] left-[46px]"></div>
-          <img
-            src="image (10).webp"
-            alt="Left Half"
-            className="w-full h-full object-cover rounded-[30px]"
-          />
-        </div>
-      
-        {/* Right Section - Form (Takes Full Width on Small Screens) */}
-        <div className="w-full md:w-1/2 flex flex-col p-6">
-          <h1 className="text-[28px] mb-6 font-semibold text-gray-800">
-            Your intelligent conversational interviewer
-          </h1>
-      
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Select Role */}
-            <div>
-              <label htmlFor="role" className="block text-sm font-semibold text-gray-700 mb-2">
-                Select Your Role
-              </label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                className="w-3/4 md:w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
-              >
-                <option value="">Choose an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </select>
+            {/* Left Section - Image (Hidden on Small Screens) */}
+            <div className="hidden md:block w-1/2 h-full">
+                <div className="w-[26px] h-[26px] bg-[#D9D9D9] rounded-full absolute top-[44px] left-[46px]"></div>
+                <img
+                    src="image (10).webp"
+                    alt="Left Half"
+                    className="w-full h-full object-cover rounded-[30px]"
+                />
             </div>
-      
-            {/* Select Competency */}
-            <div>
-              <label htmlFor="competency" className="block text-sm font-semibold text-gray-700 mb-2">
-                Select Your Competency
-              </label>
-              <select
-                id="competency"
-                name="competency"
-                value={formData.competency}
-                onChange={handleChange}
-                className="w-3/4 md:w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
-              >
-                <option value="">Choose an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </select>
-            </div>
-      
-            {/* Select Bar */}
-            <div>
+
+            {/* Right Section - Form (Takes Full Width on Small Screens) */}
+            <div className="w-full md:w-1/2 flex flex-col p-6">
+                <h1 className="text-[28px] mb-6 font-semibold text-gray-800">
+                    Your intelligent conversational interviewer
+                </h1>
+
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    {/* Select Role */}
+                    {/* <div>
+                        <label htmlFor="role" className="block text-sm font-semibold text-gray-700 mb-2">
+                            Select Your Role
+                        </label>
+                        <select
+                            id="role"
+                            name="role"
+                            value={formData.role}
+                            onChange={handleChange}
+                            className="w-3/4 md:w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
+                        >
+                            <option value="">Choose an option</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                        </select>
+                    </div> */}
+                    <CustomDropdown
+                        id="role"
+                        name="role"
+                        options={roleOptions}
+                        label="Select Role"
+                        placeholder="Choose an option"
+                        value={formData.role}
+                        onChange={(value: string) => setFormData({ ...formData, role: value })}
+                    />
+
+                    {/* Select Competency */}
+                    {/* <div>
+                        <label htmlFor="competency" className="block text-sm font-semibold text-gray-700 mb-2">
+                            Select Your Competency
+                        </label>
+                        <select
+                            id="competency"
+                            name="competency"
+                            value={formData.competency}
+                            onChange={handleChange}
+                            className="w-3/4 md:w-1/2 px-2 h-11 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-0 focus:border-gray-300 transition duration-200 ease-in-out"
+                        >
+                            <option value="">Choose an option</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                        </select>
+                    </div>
+                     */}
+
+                    <CustomDropdown
+                        id="competency"
+                        name="competency"
+                        options={competencyOptions}
+                        label="Select competency"
+                        placeholder="Choose an option"
+                        value={formData.competency}
+                        onChange={(value: string) => setFormData({ ...formData, competency: value })}
+                    />
+
+                    {/* Select Bar */}
+                    {/* <div>
               <label htmlFor="bar" className="block text-sm font-semibold text-gray-700 mb-2">
                 Select Bar
               </label>
@@ -99,22 +147,31 @@ const FullPageLayout = () => {
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </select>
+            </div> */}
+
+                    <CustomDropdown
+                        id="bar"
+                        name="bar"
+                        options={barOptions}
+                        label="Select Bar"
+                        placeholder="Choose an option"
+                        value={formData.bar}
+                        onChange={(value: string) => setFormData({ ...formData, bar: value })}
+                    />
+                    {/* Submit Button */}
+                    <div>
+                        <button
+                            type="submit"
+                            className="py-3 rounded-full focus:outline-none bg-gradient-to-r from-[#0D99FF] to-[#0A5992] text-white px-5"
+                        >
+                            Start Interview
+                        </button>
+                    </div>
+                </form>
             </div>
-      
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                className="py-3 rounded-full focus:outline-none bg-gradient-to-r from-[#0D99FF] to-[#0A5992] text-white px-5"
-              >
-                Start Interview
-              </button>
-            </div>
-          </form>
         </div>
-      </div>
-      
-      
+
+
     );
 };
 
