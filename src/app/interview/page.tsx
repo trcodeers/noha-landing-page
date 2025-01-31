@@ -98,6 +98,7 @@ const FullPageLayout = () => {
                         placeholder="Choose an option"
                         value={formData.role}
                         onChange={(value: string) => setFormData({ ...formData, role: value })}
+                        width="md:w-1/2 sm:w-full" 
                     />
 
                     {/* Select Competency */}
@@ -124,10 +125,11 @@ const FullPageLayout = () => {
                         id="competency"
                         name="competency"
                         options={competencyOptions}
-                        label="Select competency"
+                        label="Select Competency"
                         placeholder="Choose an option"
                         value={formData.competency}
                         onChange={(value: string) => setFormData({ ...formData, competency: value })}
+                        width="md:w-1/2 sm:w-full" 
                     />
 
                     {/* Select Bar */}
@@ -157,6 +159,7 @@ const FullPageLayout = () => {
                         placeholder="Choose an option"
                         value={formData.bar}
                         onChange={(value: string) => setFormData({ ...formData, bar: value })}
+                        width="md:w-1/2 sm:w-full" 
                     />
                     {/* Submit Button */}
                     <div>
