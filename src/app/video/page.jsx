@@ -24,8 +24,14 @@ const VideoInterview = () => {
         });
 
         socketConnection.on("playAudio", (audioData) => {
+            // playReceivedAudio(audioData);
+        });
+
+        socketConnection.on("streamBack", (audioData) => {
+            console.log(audioData)
             playReceivedAudio(audioData);
         });
+        
 
         setUserSocket(socketConnection);
     };
