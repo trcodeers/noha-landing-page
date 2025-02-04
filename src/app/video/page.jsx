@@ -28,7 +28,7 @@ const VideoInterview = () => {
         });
 
         socketConnection.on("streamBack", (audioData) => {
-            console.log(audioData)
+            // console.log(audioData)
             playReceivedAudio(audioData);
         });
         
@@ -121,12 +121,14 @@ const VideoInterview = () => {
             audioPlayerRef.current.load();  // Ensure fresh load
     
             // ✅ Ensure event listener runs every time
-            console.log("Audio is ready to play!", audioData);
-            console.log(audioPlayerRef.current.oncanplaythrough)
             audioPlayerRef.current.oncanplaythrough = () => {
+                console.log("Audio is ready to play!", audioData);
     
                 // Play the new audio
-                audioPlayerRef.current.play().catch((err) => console.error("Playback error:", err));
+                audioPlayerRef.current.play()
+                    .then((d)=> console.log(d))
+                    .catch((err) => console.error("Playback error:", err));
+                
                 setIsSpeaking(true);
             };
     
