@@ -13,6 +13,9 @@ const VideoInterview = () => {
     const audioStreamRef = useRef(null);
     const audioTrackRef = useRef(null);
     const audioPlayerRef = useRef(null);
+    const mediaSourceRef = useRef(null);
+    const sourceBufferRef = useRef(null);
+    const audioQueueRef = useRef([]);
 
     useEffect(() => {
         startConnection();
@@ -23,15 +26,10 @@ const VideoInterview = () => {
             transports: ["websocket"],
         });
 
-        socketConnection.on("playAudio", (audioData) => {
-            // playReceivedAudio(audioData);
-        });
-
         socketConnection.on("streamBack", (audioData) => {
-            // console.log(audioData)
-            playReceivedAudio(audioData);
+            console.log(audioData)
+            queueAudioData(audioData);
         });
-        
 
         setUserSocket(socketConnection);
     };
@@ -92,55 +90,54 @@ const VideoInterview = () => {
         }
     };
 
-    const toggleMute = () => {
-        if (audioTrackRef.current) {
-            const newMuteState = !isMuted;
-            audioTrackRef.current.enabled = !newMuteState;
-            setIsMuted(newMuteState);
+    /** ✅ Handles continuous streaming by queueing and appending chunks */
+    const queueAudioData = (audioData) => {
+        if (!(audioData instanceof Uint8Array || audioData instanceof ArrayBuffer)) {
+            console.error("Invalid audio data received:", audioData);
+            return;
+        }
+
+        const uint8Array = new Uint8Array(audioData);
+        audioQueueRef.current.push(uint8Array);
+
+        if (!mediaSourceRef.current || mediaSourceRef.current.readyState !== "open") {
+            initializeMediaSource();
+        } else {
+            appendAudioBuffer();
         }
     };
 
-    const playReceivedAudio = (audioData) => {
-        try {
-            if (!audioPlayerRef.current) return;
-    
-            // Ensure valid audio data (Uint8Array or ArrayBuffer)
-            if (!(audioData instanceof Uint8Array || audioData instanceof ArrayBuffer)) {
-                console.error("Invalid audio data received:", audioData);
-                return;
-            }
-    
-            // **Create a new Blob** and Object URL every time
-            const blob = new Blob([audioData], { type: "audio/webm" });  // Change "audio/webm" to "audio/mp3" if needed
-            const audioUrl = URL.createObjectURL(blob);
-    
-            // **Reset audio player to force reload**
-            audioPlayerRef.current.pause();
-            audioPlayerRef.current.currentTime = 0;
-            audioPlayerRef.current.src = audioUrl;
-            audioPlayerRef.current.load();  // Ensure fresh load
-    
-            // ✅ Ensure event listener runs every time
-            audioPlayerRef.current.oncanplaythrough = () => {
-                console.log("Audio is ready to play!", audioData);
-    
-                // Play the new audio
-                audioPlayerRef.current.play()
-                    .then((d)=> console.log(d))
-                    .catch((err) => console.error("Playback error:", err));
-                
-                setIsSpeaking(true);
-            };
-    
-            // **Reset speaking state when audio ends**
-            audioPlayerRef.current.onended = () => setIsSpeaking(false);
-    
-        } catch (error) {
-            console.error("Error while playing audio:", error);
-        }
+    /** ✅ Initializes MediaSource for streaming playback */
+    const initializeMediaSource = () => {
+        if (!audioPlayerRef.current) return;
+
+        mediaSourceRef.current = new MediaSource();
+        audioPlayerRef.current.src = URL.createObjectURL(mediaSourceRef.current);
+
+        mediaSourceRef.current.addEventListener("sourceopen", () => {
+            const mediaSource = mediaSourceRef.current;
+            if (!mediaSource) return;
+
+            sourceBufferRef.current = mediaSource.addSourceBuffer('audio/webm; codecs="opus"');
+
+            sourceBufferRef.current.addEventListener("updateend", appendAudioBuffer);
+
+            appendAudioBuffer();
+        });
+
+        setIsSpeaking(true);
+        audioPlayerRef.current.play().catch((err) => console.error("Playback error:", err));
     };
-    
-    
+
+    /** ✅ Appends buffered chunks to SourceBuffer */
+    const appendAudioBuffer = () => {
+        if (!sourceBufferRef.current || sourceBufferRef.current.updating || audioQueueRef.current.length === 0) {
+            return;
+        }
+
+        const chunk = audioQueueRef.current.shift();
+        sourceBufferRef.current.appendBuffer(chunk);
+    };
 
     return (
         <div>
@@ -148,11 +145,6 @@ const VideoInterview = () => {
             <button onClick={isRecording ? stopRecording : startRecording}>
                 {isRecording ? "Stop Recording" : "Start Recording"}
             </button>
-            {isRecording && (
-                <button onClick={toggleMute} style={{ marginLeft: "10px" }}>
-                    {isMuted ? "Unmute Mic" : "Mute Mic"}
-                </button>
-            )}
 
             {isSpeaking && <p>AI is speaking...</p>}
             <audio ref={audioPlayerRef} controls style={{ display: "none" }}></audio>
