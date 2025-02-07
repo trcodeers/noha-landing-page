@@ -66,8 +66,10 @@ const VideoInterview = () => {
                 }
             };
 
-            mediaRecorder.start(500);
+            mediaRecorder.start(100);
             setIsRecording(true);
+            setIsSpeaking(true);
+
         } catch (error) {
             console.error("Error accessing microphone:", error);
             alert("Failed to access microphone. Please check browser settings.");
@@ -83,7 +85,7 @@ const VideoInterview = () => {
         }
 
         setIsRecording(false);
-        setIsMuted(false);
+        setIsSpeaking(false);
 
         if (userSocket) {
             userSocket.emit("stopRecording");
