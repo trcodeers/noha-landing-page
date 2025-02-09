@@ -84,6 +84,8 @@ const VideoInterview = () => {
             audioStreamRef.current.getTracks().forEach((track) => track.stop());
         }
 
+        mediaSourceRef.current.endOfStream()
+        
         setIsRecording(false);
         setIsSpeaking(false);
 
@@ -128,7 +130,7 @@ const VideoInterview = () => {
         });
 
         setIsSpeaking(true);
-        audioPlayerRef.current.play().catch((err) => console.error("Playback error:", err));
+        audioPlayerRef.current.play().catch((err) => console.log("Playback error:", err));
     };
 
     /** ✅ Appends buffered chunks to SourceBuffer */
