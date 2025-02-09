@@ -27,7 +27,7 @@ const VideoInterview = () => {
         });
 
         socketConnection.on("streamBack", (audioData) => {
-            console.log(audioData)
+            // console.log(audioData)
             queueAudioData(audioData);
         });
 
