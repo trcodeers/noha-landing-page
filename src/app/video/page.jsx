@@ -84,12 +84,15 @@ const VideoInterview = () => {
             audioStreamRef.current.getTracks().forEach((track) => track.stop());
         }
 
-        mediaSourceRef.current.endOfStream()
-        
+            
         setIsRecording(false);
         setIsSpeaking(false);
 
+        mediaSourceRef.current.endOfStream()
+    
+
         if (userSocket) {
+            console.log('stopRecording')
             userSocket.emit("stopRecording");
         }
     };
@@ -129,7 +132,6 @@ const VideoInterview = () => {
             appendAudioBuffer();
         });
 
-        setIsSpeaking(true);
         audioPlayerRef.current.play().catch((err) => console.log("Playback error:", err));
     };
 
