@@ -34,7 +34,7 @@ const VideoCall = () => {
       </div>
 
       {/* Call Controls */}
-      <div className="absolute bottom-6 flex space-x-4 bg-gray-800 p-3 rounded-full">
+      <div className="absolute bottom-6 flex space-x-4 p-3 rounded-full">
         <button className="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition">
           <MicOff className="text-white w-6 h-6" />
         </button>
