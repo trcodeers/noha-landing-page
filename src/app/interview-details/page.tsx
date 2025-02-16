@@ -7,7 +7,7 @@ export default function JoinCall() {
   const [videoOff, setVideoOff] = useState(false);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#F6F5FF] p-6">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-[#F6F5FF]">
       <div className="bg-black text-white p-6 rounded-xl w-full max-w-md text-center">
         <p className="text-sm text-left mb-2">John Doe</p>
         <h2 className="text-lg font-semibold mb-2">Ready to join?</h2>
