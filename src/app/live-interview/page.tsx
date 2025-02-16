@@ -24,11 +24,12 @@ const VideoCall = () => {
             />
           </div>
           <p className="text-white mt-2">Noha AI Interviewer</p>
+          <MicOff className="absolute top-4 right-4 text-gray-400 w-5 h-5" />
         </div>
       </div>
 
       {/* Call Controls */}
-      {/* <div className="absolute bottom-6 flex space-x-4 p-3 rounded-full">
+      <div className="absolute bottom-6 flex space-x-4 p-3 rounded-full">
         <button className="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition">
           <MicOff className="text-white w-6 h-6" />
         </button>
@@ -41,7 +42,7 @@ const VideoCall = () => {
         <button className="p-3 rounded-full bg-red-600 hover:bg-red-500 transition">
           <PhoneOff className="text-white w-6 h-6" />
         </button>
-      </div> */}
+      </div>
 
     </div>
   );
