@@ -4,7 +4,7 @@ const VideoCall = () => {
   return (
     <div className="min-h-screen bg-black px-4 relative text-center">
 
-      <div className="flex gap-5 flex-col justify-center md:flex-row  md:justify-center md:items-center h-screen ">
+      <div className="flex gap-5 flex-col justify-center md:flex-wrap md:flex-row  md:justify-center md:items-center h-screen ">
         <div className="bg-red-900 rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px] relative">
           <div className="w-20 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
             <img
