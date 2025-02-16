@@ -3,11 +3,11 @@ import { X } from "lucide-react";
 const InterviewModal = () => {
     return (
         <>
-            <button className="absolute right-1 top-1 ">
-                <X size={24} />
-            </button>
 
             <div className="fixed inset-0 flex justify-center bg-gradient-to-br from-[#3600FF] to-[#361899] p-6">
+                <button className="absolute right-4 top-4 text-white">
+                    <X size={24} />
+                </button>
                 <div className="relative mt-10 w-full max-w-lg bg-transparent rounded-2xl p-8 text-center">
                     <h2 className="text-2xl md:text-3xl font-semibold text-white">
                         Meet Noha: Your intelligent conversational interviewer
