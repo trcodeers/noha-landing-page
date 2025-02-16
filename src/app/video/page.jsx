@@ -132,6 +132,7 @@ const VideoInterview = () => {
             appendAudioBuffer();
         });
 
+        console.log(audioPlayerRef)
         audioPlayerRef.current.play().catch((err) => console.log("Playback error:", err));
     };
 
