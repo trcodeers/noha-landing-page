@@ -2,11 +2,13 @@ import { MicOff, VideoOff, ScreenShare, PhoneOff } from "lucide-react";
 
 const VideoCall = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black px-4 relative">
+    <div className="min-h-screen bg-black px-4 relative">
+      
       {/* Video Containers */}
-      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-center   gap-4">
+        
         {/* AI Interviewer Card */}
-        <div className="bg-gray-900 rounded-lg p-4 flex flex-col justify-center items-center w-full md:w-[474px] h-[458px] relative">
+        <div className="bg-red-900 rounded-lg p-4 flex flex-col justify-center items-center w-full md:w-[474px] h-[458px] relative">
           <div className="w-20 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
             <img
               src="noha.png"
@@ -17,20 +19,17 @@ const VideoCall = () => {
           <p className="text-white mt-2">Noha AI Interviewer</p>
         </div>
 
-        {/* User Card */}
-        <div className="bg-gray-900 rounded-lg p-4 flex flex-col justify-center items-center w-full md:w-[474px] h-[458px] relative">
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
+        <div className="bg-red-900 rounded-lg p-4 flex flex-col justify-center items-center w-full md:w-[474px] h-[458px] relative">
+          <div className="w-20 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
             <img
               src="user.png"
               alt="John Doe"
               className="w-full h-full object-cover"
             />
           </div>
-          <p className="text-white mt-2">John Doe</p>
-
-          {/* Mic Off Icon */}
-          <MicOff className="absolute top-4 right-4 text-gray-400 w-5 h-5" />
+          <p className="text-white mt-2">Noha AI Interviewer</p>
         </div>
+
       </div>
 
       {/* Call Controls */}
@@ -48,6 +47,7 @@ const VideoCall = () => {
           <PhoneOff className="text-white w-6 h-6" />
         </button>
       </div>
+
     </div>
   );
 };
