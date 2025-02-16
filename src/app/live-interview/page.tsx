@@ -4,13 +4,13 @@ const VideoCall = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black px-4 relative">
       {/* Video Containers */}
-      <div className="flex flex-col md:flex-row justify-center items-center w-full max-w-5xl gap-4">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
         {/* AI Interviewer Card */}
-        <div className="bg-gray-900 rounded-lg p-4 flex flex-col items-center w-full md:w-1/2 h-56">
+        <div className="bg-gray-900 rounded-lg p-4 flex flex-col justify-center items-center w-full md:w-[474px] h-[458px] relative">
           <div className="w-20 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
             <img
               src="noha.png"
-              alt="Noha AI Interviewer"
+              alt="John Doe"
               className="w-full h-full object-cover"
             />
           </div>
@@ -18,7 +18,7 @@ const VideoCall = () => {
         </div>
 
         {/* User Card */}
-        <div className="bg-gray-900 rounded-lg p-4 flex flex-col items-center w-full md:w-1/4 h-56 relative">
+        <div className="bg-gray-900 rounded-lg p-4 flex flex-col justify-center items-center w-full md:w-[474px] h-[458px] relative">
           <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
             <img
               src="user.png"
