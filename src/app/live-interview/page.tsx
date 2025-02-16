@@ -2,7 +2,7 @@ import { MicOff, VideoOff, ScreenShare, PhoneOff } from "lucide-react";
 
 const VideoCall = () => {
   return (
-    <div className="min-h-screen bg-black px-4 relative">
+    <div className="min-h-screen bg-black px-4 relative text-center">
 
       <div className="flex gap-5 flex-col justify-center md:flex-row  md:justify-center md:items-center h-screen ">
         <div className="bg-red-900 rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px] relative">
@@ -29,7 +29,7 @@ const VideoCall = () => {
       </div>
 
       {/* Call Controls */}
-      <div className="absolute bottom-6 flex space-x-4 p-3 rounded-full">
+      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-4 p-3 bg-black/50 rounded-full">
         <button className="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition">
           <MicOff className="text-white w-6 h-6" />
         </button>
