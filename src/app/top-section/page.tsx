@@ -25,12 +25,12 @@ const HeroSection: React.FC = () => {
       </nav>
 
     
-      <img src="curve.png" width={"w-full"} alt="" className="absolute mt-[30%]" />
+      <img src="curve.png" width={"100%"} alt="" className="absolute mt-[14%]" />
 
       {/* Hero Content */}
-      <div className="flex flex-row h-screen justify-center items-center gap-10">
+      <div className="flex flex-row h-screen justify-center gap-10 mt-[10%]">
         
-        <div className="flex flex-col w-[50%] justify-center items-start text-white max-w-4xl px-6">
+        <div className="flex flex-col w-[50%] text-white max-w-4xl px-6">
           <h1 className="text-4xl font-bold">
             Noha.ai : Interview <br /> Smarter, Hire Better.
           </h1>
