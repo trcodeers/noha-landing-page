@@ -4,7 +4,7 @@ const HeroSection: React.FC = () => {
   return (
     <div
       // style={{ backgroundImage: "url('curve.png')" }}
-      className="relative min-h-screen bg-[#361899] flex flex-col items-center">
+      className="relative h-screen bg-[#361899] flex flex-col items-center">
       {/* Navbar */}
       <nav className="w-full max-w-6xl mt-6 px-6 flex justify-between items-center bg-[#3224A2] rounded-full py-3 shadow-lg">
         <div className="text-white text-lg font-semibold px-6">Noha.ai</div>
