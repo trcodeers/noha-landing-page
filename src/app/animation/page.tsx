@@ -20,10 +20,11 @@ export default function AnimatedText() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-gray-100 to-white">
+    <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-br from-gray-100 to-white">
+
       <div className="text-3xl font-medium text-gray-800 flex items-center">
-        Noha is a&nbsp;
-        <div className="relative h-10 overflow-hidden w-80">
+        Noha is a
+        <div className="relative h-14 overflow-hidden w-96 pl-2">
           <AnimatePresence mode="sync">
             <motion.div
               key={index}
@@ -31,11 +32,17 @@ export default function AnimatedText() {
               animate={{ y: "0%" }}
               exit={{ y: "-100%" }}
               transition={{ duration: 0.7, ease: "easeInOut" }}
-              className="absolute w-full text-indigo-600 font-bold text-center"
+              className="absolute mt-2 w-full text-indigo-600 font-bold  whitespace-nowrap"
             >
               {words[index]}
             </motion.div>
           </AnimatePresence>
+          <div className="mt-10">
+            <img
+              src="vector-6.png"
+              alt="Mail Icon"
+            />
+          </div>
         </div>
       </div>
     </div>
