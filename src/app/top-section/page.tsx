@@ -42,10 +42,10 @@ const HeroSection: React.FC = () => {
 
           {/* Buttons */}
           <div className="mt-6 flex space-x-4">
-            <button className="px-6 py-3 bg-[#77FFF1] text-black font-semibold rounded-full shadow-md">
+            <button className="px-8 py-3 text-black font-semibold rounded-full bg-gradient-to-r from-[#77FFF1] to-[#0B9284] ">
               Try Noha
             </button>
-            <button className="px-6 py-3 border border-gray-400 text-white rounded-full shadow-md hover:bg-gray-700 transition">
+            <button className="px-6 py-3 border border-[#77FFF1] text-white rounded-full">
               Watch a demo
             </button>
           </div>
