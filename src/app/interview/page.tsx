@@ -6,16 +6,18 @@ import { useState } from "react";
 const MyPage = () => {
 
     const [interviewId, setInterviewId] = useState<null | string>(null)
+    const [details, setDetails] = useState({} as any)
 
     const handleSubmit = (data: { name: string; email: string }) => {
         console.log("Submitted Data:", data);
         setInterviewId('12345')
+        setDetails({...data})
     };
 
     return (interviewId === null ? 
         <InterviewDetails onSubmit={handleSubmit} />
         :
-        <LiveInterview/>
+        <LiveInterview name={details.name} />
     );
 };
 
