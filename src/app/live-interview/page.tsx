@@ -23,7 +23,7 @@ const VideoCall = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <p className="text-white mt-2">Noha AI Interviewer</p>
+          <p className="text-white mt-2">John Doe</p>
           <MicOff className="absolute top-4 right-4 text-gray-400 w-5 h-5" />
         </div>
       </div>
@@ -36,9 +36,9 @@ const VideoCall = () => {
         <button className="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition">
           <VideoOff className="text-white w-6 h-6" />
         </button>
-        <button className="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition">
+        {/* <button className="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition">
           <ScreenShare className="text-white w-6 h-6" />
-        </button>
+        </button> */}
         <button className="p-3 rounded-full bg-red-600 hover:bg-red-500 transition">
           <PhoneOff className="text-white w-6 h-6" />
         </button>
