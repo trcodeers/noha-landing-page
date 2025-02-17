@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 
-const HeroSection: React.FC = () => {
+const Section1: React.FC = () => {
   return (
     <div
   className="relative h-screen bg-[#361899] flex flex-col items-center 
@@ -68,4 +68,4 @@ const HeroSection: React.FC = () => {
   );
 };
 
-export default HeroSection;
+export default Section1;
