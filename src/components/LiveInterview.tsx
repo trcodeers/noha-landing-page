@@ -1,6 +1,6 @@
 import { MicOff, VideoOff, ScreenShare, PhoneOff } from "lucide-react";
 
-const VideoCall = () => {
+const LiveInterview = () => {
   return (
     <div className="min-h-screen bg-black px-4 relative text-center">
 
@@ -48,4 +48,4 @@ const VideoCall = () => {
   );
 };
 
-export default VideoCall;
+export default LiveInterview;
