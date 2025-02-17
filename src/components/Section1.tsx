@@ -50,7 +50,7 @@ const Section1: React.FC = () => {
 
           {/* Buttons */}
           <div className="mt-6 flex space-x-4">
-            <Link href={"/details"}>
+            <Link href={"/interview"}>
               <button className="px-8 py-3 text-black font-semibold rounded-full bg-gradient-to-r from-[#77FFF1] to-[#0B9284] ">
                 Try Noha
               </button>
