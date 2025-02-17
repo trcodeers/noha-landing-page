@@ -1,79 +1,11 @@
 import Link from "next/link";
+import HeroSection from "./top-section/page";
 
 export default function Home() {
   return (
     <>
 
-      <div className="bg-gray-900 text-white h-[835px]">
-        {/* Navigation Bar */}
-        <nav className="flex items-center justify-between px-6 py-4">
-          {/* Left Section */}
-          <div className="flex items-center">
-            <div className="w-8 h-8 bg-gray-400 rounded-full"></div>
-          </div>
-
-          {/* Center Section */}
-          <div className="flex space-x-8">
-            <a href="#" className="text-sm hover:text-blue-500">
-              Home
-            </a>
-            <a href="#" className="text-sm hover:text-blue-500">
-              Product
-            </a>
-            <a href="#" className="text-sm hover:text-blue-500">
-              About
-            </a>
-          </div>
-
-          {/* Right Section */}
-          <div>
-          <Link href={'interview'}>
-            <button className="text-sm border border-blue-500 rounded-full px-4 py-2 text-white hidden lg:block">
-              Try Noha Interviewer
-            </button>
-          </Link>
-          </div>
-
-        </nav>
-
-        {/* Main Content Section */}
-        <section className="flex flex-col items-center justify-center px-6">
-          {/* Title */}
-
-          <div className="mb-12 mt-12 flex justify-center">
-            <div className="w-full sm:w-[421px] md:w-[500px] lg:w-[600px]">
-              <h2 className="text-[36px] sm:text-[28px] md:text-[32px] lg:text-[36px] text-center">
-                Noha.ai : Your AI technical interviewer
-              </h2>
-            </div>
-
-          </div>
-
-          {/* Description */}
-          <p className="text-center text-gray-400 max-w-2xl mb-6">
-            An AI technical interviewer that conducts deep-dive, human-like
-            conversational interviews as per the company set bar & competency to
-            identify top talents effortlessly. Say goodbye to manual interviews and
-            hello to Noha.
-          </p>
-
-          {/* Buttons */}
-          <div className="flex space-x-4">
-            <button className="bg-gradient-to-r from-[#0D99FF] to-[#0A5992] text-white px-6 py-3 rounded-full transition">
-              Watch a demo
-            </button>
-
-          <Link href={'interview'}>
-              <button className="border border-[#0D99FF] px-6 py-3 rounded-full">
-                Try Noha Interviewer
-              </button>
-          </Link>
-          </div>
-
-          {/* Placeholder for Content Below */}
-          <div className="md:w-[537px] md:h-[365px]  bg-[#2C6287] rounded-tl-[30px] rounded-tr-[30px] mt-[50px]"></div>
-        </section>
-      </div>
+      <HeroSection/>
 
       <div className="mb-14 mt-12 flex justify-center">
         <div className="w-[421px]">
