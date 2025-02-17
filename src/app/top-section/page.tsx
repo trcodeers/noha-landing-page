@@ -25,10 +25,6 @@ const HeroSection: React.FC = () => {
         </div>
       </nav>
 
-
-      {/* <img src="curve.png" width={"100%"} alt="" className="absolute mt-[14%]" /> */}
-
-
       {/* Hero Content */}
       <div className="flex flex-row h-screen justify-center gap-10 mt-[10%]">
 
