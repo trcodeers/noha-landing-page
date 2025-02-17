@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
 
-const FeedbackScreen = () => {
+const Feedback = () => {
   const [rating, setRating] = useState<number>(0);
 
   const handleRating = (selectedRating: number) => {
@@ -57,4 +57,4 @@ const FeedbackScreen = () => {
   );
 };
 
-export default FeedbackScreen;
+export default Feedback;

@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Mic, MicOff, Video, VideoOff, PhoneOff, Phone } from "lucide-react";
 
-const LiveInterview = ({ name }: { name: string }) => {
+const LiveInterview = ({ name, onCancelCall }: { name: string, onCancelCall: () => void }) => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [isMicOn, setIsMicOn] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -95,7 +95,7 @@ const LiveInterview = ({ name }: { name: string }) => {
         </button>
 
         {/* End Call Button */}
-        <button className="p-3 rounded-full bg-red-600 hover:bg-red-500 transition">
+        <button onClick={onCancelCall} className="p-3 rounded-full bg-red-600 hover:bg-red-500 transition">
           <Phone className="text-white w-6 h-6" />
         </button>
       </div>
