@@ -1,48 +1,45 @@
 "use client";
+
+import AnimatedText from "@/components/AnimatedText";
 import FrontPage from "@/components/FrontPage";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const Index = () => {
-  const [isAnimating, setIsAnimating] = useState(true);
+export default function Home() {
+  const [screen, setScreen] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => setIsAnimating(false), 1500); // Transition duration
+    const timer1 = setTimeout(() => setScreen(1), 4000); // Show blue screen after 4s
+    const timer2 = setTimeout(() => setScreen(2), 4500); // Show white screen after 6s
+    const timer3 = setTimeout(() => setScreen(3), 4700); // Show FrontPage after 8s
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
   }, []);
 
   return (
-    <div className="relative">
-      {isAnimating && (
-        <div className="absolute inset-0 z-50">
-          {/* Blue Screen */}
-          <motion.div
+    <div className="h-screen w-screen">
+      {screen === 0 && <AnimatedText />}
+      {screen === 1 && <motion.div
             initial={{ y: "-100%" }}
             animate={{ y: "0%" }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.1, ease: "easeInOut" }}
             className="absolute inset-0 bg-[#361899]"
           />
 
-          {/* White Screen */}
-          <motion.div
+}
+      {screen === 2 &&           <motion.div
             initial={{ y: "-100%" }}
             animate={{ y: "0%" }}
             transition={{ duration: 0.7, ease: "easeInOut", delay: 0.7 }}
             className="absolute inset-0 bg-white"
           />
-        </div>
-      )}
 
-      {/* Actual Page Content */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.4 }} // Delayed to match animation
-        className={isAnimating ? "invisible" : "visible"}
-      >
-        <FrontPage />
-      </motion.div>
+        }
+      {screen === 3 && <FrontPage />}
     </div>
   );
-};
-
-export default Index;
+}
