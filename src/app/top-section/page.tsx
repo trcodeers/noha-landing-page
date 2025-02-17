@@ -4,8 +4,10 @@ import React from "react";
 const HeroSection: React.FC = () => {
   return (
     <div
-      className="relative h-screen bg-[#361899] flex flex-col items-center bg-[url('/curve.png')] bg-no-repeat bg-cover bg-center"
-    >
+  className="relative h-screen bg-[#361899] flex flex-col items-center 
+             bg-[url('/curve.png')] bg-no-repeat bg-contain bg-center"
+>
+
       {/* Navbar */}
       <nav className="w-full max-w-6xl mt-6 px-6 flex justify-between items-center bg-[#3224A2] rounded-full py-3 shadow-lg">
         <div className="text-white text-lg font-semibold px-6">Noha.ai</div>
