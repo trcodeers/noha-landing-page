@@ -10,11 +10,11 @@ export default function JoinCall() {
     <>
 
       <div className="
-        bg-[url('/curve2.png')] bg-no-repeat bg-contain bg-center w-full
+        bg-[url('/curve2.png')] bg-no-repeat bg-cover bg-center w-full
         flex flex-col justify-center items-center min-h-screen 
         bg-[#F6F5FF]
-        "
-      >
+      ">
+
         <div className="bg-black text-white p-6 rounded-xl w-full max-w-md text-center">
           <p className="text-sm text-left mb-2">John Doe</p>
           <h2 className="text-lg font-semibold mb-2">Ready to join?</h2>
