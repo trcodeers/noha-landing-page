@@ -1,27 +1,30 @@
 'use client'
-import { useState, useRef } from "react";
-import { Mic, MicOff, Video, VideoOff, PhoneOff } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Mic, MicOff, Video, VideoOff, PhoneOff, Phone } from "lucide-react";
 
-const LiveInterview = (props: any) => {
-  const { name } = props
-
+const LiveInterview = ({ name }: { name: string }) => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [isMicOn, setIsMicOn] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
+  const videoStreamRef = useRef<MediaStream | null>(null);
+  const audioStreamRef = useRef<MediaStream | null>(null);
 
   // Toggle Camera
   const toggleCamera = async () => {
     if (isCameraOn) {
       // Stop the camera
-      streamRef.current?.getTracks().forEach(track => track.stop());
+      videoStreamRef.current?.getTracks().forEach(track => track.stop());
       if (videoRef.current) videoRef.current.srcObject = null;
+      videoStreamRef.current = null;
       setIsCameraOn(false);
     } else {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-        if (videoRef.current) videoRef.current.srcObject = stream;
-        streamRef.current = stream;
+        videoStreamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+        }
         setIsCameraOn(true);
       } catch (error) {
         console.error("Error accessing the camera:", error);
@@ -32,12 +35,13 @@ const LiveInterview = (props: any) => {
   // Toggle Mic
   const toggleMic = async () => {
     if (isMicOn) {
-      streamRef.current?.getAudioTracks().forEach(track => track.stop());
+      audioStreamRef.current?.getTracks().forEach(track => track.stop());
+      audioStreamRef.current = null;
       setIsMicOn(false);
     } else {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        streamRef.current = stream;
+        audioStreamRef.current = stream;
         setIsMicOn(true);
       } catch (error) {
         console.error("Error accessing the microphone:", error);
@@ -61,7 +65,13 @@ const LiveInterview = (props: any) => {
         {/* User Video */}
         <div className="bg-[#1F1F1F] rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px] relative">
           {isCameraOn ? (
-            <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover rounded-lg" />
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="w-full h-full object-cover rounded-lg"
+            />
           ) : (
             <div className="w-20 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
               <img src="user.png" alt="User" className="w-full h-full object-cover" />
@@ -86,7 +96,7 @@ const LiveInterview = (props: any) => {
 
         {/* End Call Button */}
         <button className="p-3 rounded-full bg-red-600 hover:bg-red-500 transition">
-          <PhoneOff className="text-white w-6 h-6" />
+          <Phone className="text-white w-6 h-6" />
         </button>
       </div>
 
