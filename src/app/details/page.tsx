@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from 'next/compat/router'
+import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import { X } from "lucide-react";
 
