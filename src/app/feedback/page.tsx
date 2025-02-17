@@ -15,8 +15,11 @@ const FeedbackScreen = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#F6F5FF] px-6">
-      <div className="  text-center max-w-md w-full relative">
+    <div className="
+    bg-[url('/curve2.png')] bg-no-repeat bg-cover bg-center w-full
+    flex flex-col justify-center items-center min-h-screen 
+    bg-[#F6F5FF]
+  ">      <div className="  text-center max-w-md w-full relative">
         <h2 className="text-xl font-semibold text-gray-900">
           The interview with Noha has been completed.
         </h2>
@@ -50,7 +53,6 @@ const FeedbackScreen = () => {
           </button>
         )}
       </div>
-      <img src="curve2.png" width={"100%"} alt="" className="absolute " />
     </div>
   );
 };
