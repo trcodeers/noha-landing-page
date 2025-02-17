@@ -31,7 +31,7 @@ export default function Home() {
           />
 
 }
-      {screen === 2 &&           <motion.div
+      {screen === 2 && <motion.div
             initial={{ y: "-100%" }}
             animate={{ y: "0%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
