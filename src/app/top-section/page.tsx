@@ -4,8 +4,8 @@ import React from "react";
 const HeroSection: React.FC = () => {
   return (
     <div
-      // style={{ backgroundImage: "url('curve.png')" }}
-      className="relative h-screen bg-[#361899] flex flex-col items-center">
+      className="relative h-screen bg-[#361899] flex flex-col items-center bg-[url('/curve.png')] bg-no-repeat bg-cover bg-center"
+    >
       {/* Navbar */}
       <nav className="w-full max-w-6xl mt-6 px-6 flex justify-between items-center bg-[#3224A2] rounded-full py-3 shadow-lg">
         <div className="text-white text-lg font-semibold px-6">Noha.ai</div>
@@ -16,21 +16,22 @@ const HeroSection: React.FC = () => {
           <a href="#" className="hover:text-gray-300">Use cases</a>
         </div>
         <div className="flex space-x-4 pr-6">
-          <button className="px-5 py-2 bg-transparent text-white border border-gray-400 rounded-full hover:bg-gray-700">
+          <button className="px-8 py-3 text-black font-semibold rounded-full bg-gradient-to-r from-[#77FFF1] to-[#0B9284] ">
             Try Noha
           </button>
-          <button className="px-5 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200">
+          <button className="px-5 py-2 border border-[#77FFF1] text-white rounded-full shadow-md">
             Login
           </button>
         </div>
       </nav>
 
-    
-      <img src="curve.png" width={"100%"} alt="" className="absolute mt-[14%]" />
+
+      {/* <img src="curve.png" width={"100%"} alt="" className="absolute mt-[14%]" /> */}
+
 
       {/* Hero Content */}
       <div className="flex flex-row h-screen justify-center gap-10 mt-[10%]">
-        
+
         <div className="flex flex-col w-[50%] text-white max-w-4xl px-6">
           <h1 className="text-4xl font-bold">
             Noha.ai : Interview <br /> Smarter, Hire Better.
@@ -54,7 +55,7 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
         <div className="w-72 h-72 bg-[#16073D] rounded-full"></div>
-      
+
       </div>
 
     </div>
