@@ -1,28 +1,45 @@
-'use client'
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+"use client";
 
-export default function ZoomEffect() {
-  const [isZoomed, setIsZoomed] = useState(false);
+import AnimatedText from "@/components/AnimatedText";
+import FrontPage from "@/components/FrontPage";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+
+export default function Home() {
+  const [screen, setScreen] = useState(0);
 
   useEffect(() => {
-    setTimeout(() => setIsZoomed(true), 500); // Shrink after 0.5s
-    setTimeout(() => setIsZoomed(false), 2000); // Expand after 2s
+    const timer1 = setTimeout(() => setScreen(1), 4000); // Show blue screen after 4s
+    const timer2 = setTimeout(() => setScreen(2), 4300); // Show white screen after 6s
+    const timer3 = setTimeout(() => setScreen(3), 4400); // Show FrontPage after 8s
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
   }, []);
 
   return (
-    <motion.div
-      className="fixed top-1/2 left-1/2"
-      style={{
-        transform: "translate(-50%, -50%)",
-      }}
-      animate={{
-        borderRadius: isZoomed ? "50%" : "0%",
-        width: isZoomed ? "150px" : "100vw",
-        height: isZoomed ? "150px" : "100vh",
-        backgroundColor: isZoomed ? "#141E61" : "#02006A",
-      }}
-      transition={{ duration: 1.5, ease: "easeInOut" }}
-    />
+    <div className="h-screen w-screen">
+      {screen === 0 && <AnimatedText />}
+      {screen === 1 && <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute inset-0 bg-[#361899]"
+          />
+
+}
+      {screen === 2 &&           <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: "0%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute inset-0 bg-white"
+          />
+
+        }
+      {screen === 3 && <FrontPage />}
+    </div>
   );
 }
