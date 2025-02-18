@@ -107,12 +107,14 @@ export default function FrontPage() {
 
       <section>
         <div className="mx-[20%] flex flex-row flex-wrap justify-center gap-5">
-          <div className="w-[225px] h-[200px] bg-[#34A9FF] rounded-[40px]"></div>
-          <div className="w-[225px] h-[200px] bg-[#D0EBFF] rounded-[40px]"></div>
-          <div className="w-[225px] h-[200px] bg-[#34A9FF] rounded-[40px]"></div>
-          <div className="w-[225px] h-[200px] bg-[#D0EBFF] rounded-[40px]"></div>
-          <div className="w-[225px] h-[200px] bg-[#34A9FF] rounded-[40px]"></div>
-          <div className="w-[225px] h-[200px] bg-[#D0EBFF] rounded-[40px]"></div>
+          <div className="px-4 w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">5X hiring speed</div>
+          <div className="w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">
+  80% interview efficiency
+</div>
+          <div className="w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">75% cost reduction</div>
+          <div className="w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">100% conversational</div>
+          <div className="w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">95% candidate experience</div>
+          <div className="px-2 w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">100% unbaisness</div>
         </div>
       </section>
 
