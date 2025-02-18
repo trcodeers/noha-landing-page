@@ -129,7 +129,7 @@ const VideoInterview = () => {
         });
 
         setIsSpeaking(true);
-        audioPlayerRef.current.play().catch((err: any) => console.log("Playback error:", err));
+        audioPlayerRef.current.play().catch((err: any) => console.log());
     };
 
     /** ✅ Appends buffered chunks to SourceBuffer */
