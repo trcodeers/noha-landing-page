@@ -166,7 +166,7 @@ const MyPage = () => {
     return (
         <>
         <audio ref={audioPlayerRef} controls style={{ display: "none" }}></audio>
-        {!callended && (interviewStarted === null ? 
+        {!callended && (!interviewStarted ? 
             <InterviewDetails onSubmit={handleSubmit} />
                 :
             <LiveInterview name={details.name} onCancelCall={onCancelCall} userSocket={userSocket} isMicOn={isMicOn} startRecording={startRecording} stopRecording={stopRecording} isRecording={isRecording} />)
