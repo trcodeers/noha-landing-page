@@ -99,6 +99,8 @@ const MyPage = () => {
       };
     
       const stopRecording = () => {
+        try {
+            
         setIsRecording(false)
           if (mediaRecorderRef.current) {
               mediaRecorderRef.current.stop();
@@ -114,10 +116,15 @@ const MyPage = () => {
               userSocket.emit("stopRecording");
           }
           setIsMicOn(false)
+        } catch (error) {
+            
+        }
       };
     
       /** ✅ Handles continuous streaming by queueing and appending chunks */
       const queueAudioData = (audioData: any) => {
+        try {
+   
           if (!(audioData instanceof Uint8Array || audioData instanceof ArrayBuffer)) {
               console.error("Invalid audio data received:", audioData);
               return;
@@ -131,6 +138,10 @@ const MyPage = () => {
           } else {
               appendAudioBuffer();
           }
+                   
+        } catch (error) {
+            
+        }
       };
     
       /** ✅ Initializes MediaSource for streaming playback */
