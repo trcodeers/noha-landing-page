@@ -2,13 +2,13 @@
 import { useState, useRef } from "react";
 import { Mic, MicOff, Video, VideoOff, Phone } from "lucide-react";
 
-const LiveInterview = ({ name, onCancelCall }: any) => {
-
+const LiveInterview = ({ name, onCancelCall, userSocket, isRecording, stopRecording, startRecording, isMicOn }: any) => {
+console.log('isRecording', isRecording)
   const [isCameraOn, setIsCameraOn] = useState(false);
-  const [isMicOn, setIsMicOn] = useState(false);
 
   const videoRef = useRef<any>(null);
   const videoStreamRef = useRef<any>(null);
+ 
 
   const toggleCamera = async () => {
     if (isCameraOn) {
@@ -30,13 +30,17 @@ const LiveInterview = ({ name, onCancelCall }: any) => {
       }
     }
   };
-
-    // Toggle Mic
+    
+  // Toggle Mic
     const toggleMic = async () => {
-      setIsMicOn(isOn => !isOn)
+      console.log('toggleMic')
+      if(isRecording){
+        stopRecording()
+      }
+      else{
+        startRecording()
+      }
     };
-  
-
     
   return (
     <div className="min-h-screen bg-black px-4 flex flex-col justify-center items-center">
@@ -44,7 +48,7 @@ const LiveInterview = ({ name, onCancelCall }: any) => {
         {/* AI Interviewer */}
         <div className="relative bg-[#1F1F1F] rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px]">
            <img src="noha.png" alt="Noha AI Interviewer" className="w-[226px] h-[226px] object-cover" />
-          <p className="text-white mt-2 absolute left-3 bottom-2">Noha AI Interviewer</p>
+            <p className="text-white mt-2 absolute left-3 bottom-2">Noha AI Interviewer</p>
         </div>
 
         {/* User Video */}
