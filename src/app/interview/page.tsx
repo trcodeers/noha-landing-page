@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 
 const MyPage = () => {
 
-    const [interviewId, setInterviewId] = useState<null | string>(null)
+    const [interviewStarted, setInterviewStarted] = useState<null | string>(null)
     const [details, setDetails] = useState({} as any)
 
     const [callended, setCallEnded] = useState(false)
@@ -30,7 +30,7 @@ const MyPage = () => {
 
     const handleSubmit = (data: { name: string; email: string }) => {
         console.log("Submitted Data:", data);
-        setInterviewId('12345')
+        setInterviewStarted('12345')
         setDetails({...data})
         startConnection()
     };
@@ -166,7 +166,7 @@ const MyPage = () => {
     return (
         <>
         <audio ref={audioPlayerRef} controls style={{ display: "none" }}></audio>
-        {!callended && (interviewId === null ? 
+        {!callended && (interviewStarted === null ? 
             <InterviewDetails onSubmit={handleSubmit} />
                 :
             <LiveInterview name={details.name} onCancelCall={onCancelCall} userSocket={userSocket} isMicOn={isMicOn} startRecording={startRecording} stopRecording={stopRecording} isRecording={isRecording} />)
