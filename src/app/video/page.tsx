@@ -128,7 +128,6 @@ const VideoInterview = () => {
             appendAudioBuffer();
         });
 
-        setIsSpeaking(true);
         audioPlayerRef.current.play().catch((err: any) => console.log());
     };
 
