@@ -86,6 +86,7 @@ const VideoInterview = () => {
 
         setIsRecording(false);
         setIsSpeaking(false);
+        mediaSourceRef.current.endOfStream()
 
         if (userSocket) {
             userSocket.emit("stopRecording");
@@ -128,7 +129,7 @@ const VideoInterview = () => {
         });
 
         setIsSpeaking(true);
-        audioPlayerRef.current.play().catch((err) => console.error("Playback error:", err));
+        audioPlayerRef.current.play().catch((err) => console.log("Playback error:", err));
     };
 
     /** ✅ Appends buffered chunks to SourceBuffer */
