@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 
 const MyPage = () => {
 
-    const [interviewStarted, setInterviewStarted] = useState<null | string>(null)
+    const [interviewStarted, setInterviewStarted] = useState<boolean>(false)
     const [details, setDetails] = useState({} as any)
 
     const [callended, setCallEnded] = useState(false)
@@ -30,7 +30,7 @@ const MyPage = () => {
 
     const handleSubmit = (data: { name: string; email: string }) => {
         console.log("Submitted Data:", data);
-        setInterviewStarted('12345')
+        setInterviewStarted(true)
         setDetails({...data})
         startConnection()
     };
