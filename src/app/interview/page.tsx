@@ -12,7 +12,10 @@ const MyPage = () => {
 
     const [callended, setCallEnded] = useState(false)
 
-    const [backendServiceLink] = useState("http://localhost:2000");
+    const [backendServiceLink] = useState(
+        "https://noha-be-python.onrender.com"
+        // "http://localhost:2000"
+        );
     const [userSocket, setUserSocket] = useState<any>(null);
     
     const startConnection = async () => {
