@@ -92,7 +92,7 @@ const MyPage = () => {
                   }
               };
     
-              mediaRecorder.start(100);
+              mediaRecorder.start(10);
               setIsSpeaking(true);
     
           } catch (error) {
