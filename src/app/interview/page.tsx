@@ -36,8 +36,10 @@ const MyPage = () => {
     };
 
     const onCancelCall = () =>{
+        stopRecording()
         console.log('klkl')
         setCallEnded(true)
+        userSocket.disconnect()
     }
 
       const [isMicOn, setIsMicOn] = useState(false);
@@ -106,7 +108,7 @@ const MyPage = () => {
           }
     
           setIsSpeaking(false);
-          mediaSourceRef.current.endOfStream()
+          mediaSourceRef?.current?.endOfStream()
     
           if (userSocket) {
               userSocket.emit("stopRecording");
