@@ -106,15 +106,28 @@ export default function FrontPage() {
       </div>
 
       <section>
-        <div className="mx-[20%] flex flex-row flex-wrap justify-center gap-5">
-          <div className="px-4 w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">5X hiring speed</div>
-          <div className="w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">
+        <div className=" mx-[20%] flex flex-row flex-wrap justify-center gap-5">
+          <div className="relative px-4 w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">
+            5X hiring speed
+            <img src="curve4.png" className="absolute right-0 bottom-0"/>
+          </div>
+          <div className="relative w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">
   80% interview efficiency
+  <img src="curve5.png" className="absolute left-0 top-0"/>
+
 </div>
-          <div className="w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">75% cost reduction</div>
-          <div className="w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">100% conversational</div>
-          <div className="w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">95% candidate experience</div>
-          <div className="px-2 w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">100% unbaisness</div>
+          <div className="relative w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">75% cost reduction
+          <img src="curve6.png" className="absolute right-0 top-0"/>
+          </div>
+          <div className="relative w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">100% conversational
+          <img src="curve7.png" className="absolute left-0 top-[20%]"/>
+          </div>
+          <div className="relative w-[225px] h-[200px] bg-[#A78CFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">95% candidate experience
+          <img src="curve8.png" className="absolute left-0 bottom-0"/>
+          </div>
+          <div className="relative px-2 w-[225px] h-[200px] bg-[#F1EDFF] rounded-[40px] flex items-center justify-center text-center font-[500] text-[28px]">100% unbaisness
+          <img src="curve9.png" className="absolute right-0 bottom-0"/>
+          </div>
         </div>
       </section>
 
