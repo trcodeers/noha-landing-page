@@ -74,8 +74,9 @@ export default function FrontPage() {
       </section>
 
       <section className="">
-        <div className="lg:px-[20%] bg-[#0C1B2E] text-white py-16 px-8 rounded-tr-[60px] rounded-tl-[60px]">
+        <div className="relative lg:px-[20%] bg-[#1C0860] text-white py-16 px-8 rounded-tr-[60px] rounded-tl-[60px]">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-4">
+          <img src="curve3.png" alt="" className="absolute left-0" />
             {/* Left Section */}
             <div className="flex-1">
               <h1 className="text-4xl font-semibold leading-tight">
