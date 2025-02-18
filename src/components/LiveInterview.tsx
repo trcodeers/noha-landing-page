@@ -42,17 +42,16 @@ const LiveInterview = ({ name, onCancelCall }: any) => {
     <div className="min-h-screen bg-black px-4 flex flex-col justify-center items-center">
       <div className="flex gap-5 flex-col md:flex-row md:justify-center md:items-center">
         {/* AI Interviewer */}
-        <div className="bg-[#1F1F1F] rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px]">
-          <div className="w-20 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
-            <img src="noha.png" alt="Noha AI Interviewer" className="w-full h-full object-cover" />
-          </div>
-          <p className="text-white mt-2">Noha AI Interviewer</p>
+        <div className="relative bg-[#1F1F1F] rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px]">
+           <img src="noha.png" alt="Noha AI Interviewer" className="w-[226px] h-[226px] object-cover" />
+          <p className="text-white mt-2 absolute left-3 bottom-2">Noha AI Interviewer</p>
         </div>
 
         {/* User Video */}
-        <div className="bg-[#1F1F1F] rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px]">
-          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover rounded-lg" />
-          <p className="text-white mt-2">{name}</p>
+        <div className="relative bg-[#1F1F1F] rounded-lg p-4 flex flex-col justify-center items-center w-full h-[200px] md:w-[474px] md:h-[458px]">
+           <video ref={videoRef} autoPlay playsInline muted className="w-full h-[90%] object-cover rounded-lg" />
+          {!isCameraOn && <img src="user.png" alt="Noha AI Interviewer" className="w-[226px] h-[226px] object-cover mb-[45%]" />}
+          <p className="text-white mt-2 absolute left-3 bottom-2">{name}</p>
         </div>
       </div>
 
