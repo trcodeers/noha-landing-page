@@ -57,18 +57,20 @@ const MyPage = () => {
       const [isSpeaking, setIsSpeaking] = useState(false);
       
       const checkMicrophonePermission = async () => {
-          try {
-              const permissionStatus = await navigator.permissions.query({ name: "microphone" });
-              if (permissionStatus.state === "denied") {
-                  alert("Microphone access is denied. Please allow access in your browser settings.");
-                  return false;
-              }
-              return true;
-          } catch (error) {
-              console.warn("Microphone permission query not supported, trying direct access.");
-              return true;
-          }
-      };
+        try {
+            const permissionStatus = await navigator.permissions.query({ name: "microphone" as any });
+            if (permissionStatus.state === "denied") {
+                alert("Microphone access is denied. Please allow access in your browser settings.");
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.warn("Microphone permission query not supported, trying direct access.");
+            return true;
+        }
+    };
+    
+    
     
       const startRecording = async () => {
           const hasPermission = await checkMicrophonePermission();
