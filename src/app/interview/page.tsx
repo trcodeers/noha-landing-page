@@ -13,8 +13,7 @@ const MyPage = () => {
     const [callended, setCallEnded] = useState(false)
 
     const [backendServiceLink] = useState(
-        "https://noha-be-python.onrender.com"
-        // "http://localhost:2000"
+        "http://localhost:2000"
         );
     const [userSocket, setUserSocket] = useState<any>(null);
     
