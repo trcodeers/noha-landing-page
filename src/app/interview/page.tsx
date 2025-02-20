@@ -15,9 +15,6 @@ const MyPage = () => {
           .catch(error => console.error("Error playing audio:", error));
       };
 
-      useEffect(() =>{
-        // playAudio()
-      }, [])
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false)
     const [details, setDetails] = useState({} as any)
 
@@ -28,7 +25,7 @@ const MyPage = () => {
         );
     const [userSocket, setUserSocket] = useState<any>(null);
     
-    const startConnection = async () => {
+    const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink + "/guest", {
             transports: ["websocket"],
         });
@@ -36,7 +33,8 @@ const MyPage = () => {
         socketConnection.on('connect', ()=>{
             console.log('connected')
             setInterviewStarted(true)
-            playAudio()
+            console.log(details)
+            playSynthesizedAudio(`hi ${userDetails.name} I'm Noha, I'll be conducting your interview today. Let's get started with your first question: Find an index in an array where the sum of elements to the left equals the sum to the right`)
         })
 
         socketConnection.on("streamBack", (audioData: any) => {
@@ -50,7 +48,7 @@ const MyPage = () => {
     const handleSubmit = (data: { name: string; email: string }) => {
         console.log("Submitted Data:", data);
         setDetails({...data})
-        startConnection()
+        startConnection(data)
     };
 
     const onCancelCall = () =>{
@@ -192,7 +190,8 @@ const MyPage = () => {
           const chunk = audioQueueRef.current.shift();
           sourceBufferRef.current.appendBuffer(chunk);
       };
-      
+
+
       const playSynthesizedAudio = async (text: string) => {
         try {
           const response = await axios.post("http://35.244.0.35:5000/synthesize", { text }, {
