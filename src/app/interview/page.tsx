@@ -13,7 +13,7 @@ const MyPage = () => {
     const [callended, setCallEnded] = useState(false)
 
     const [backendServiceLink] = useState(
-        "http://localhost:2000"
+        "http://localhost:5000"
         );
     const [userSocket, setUserSocket] = useState<any>(null);
     
