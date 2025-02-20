@@ -8,6 +8,16 @@ import { io } from "socket.io-client";
 
 const MyPage = () => {
 
+    const playAudio = () => {
+        const audio = new Audio('output.wav'); // Public folder files are served from the root
+        audio.play()
+          .then(() => console.log("Audio playing..."))
+          .catch(error => console.error("Error playing audio:", error));
+      };
+
+      useEffect(() =>{
+        // playAudio()
+      }, [])
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false)
     const [details, setDetails] = useState({} as any)
 
@@ -23,6 +33,12 @@ const MyPage = () => {
             transports: ["websocket"],
         });
 
+        socketConnection.on('connect', ()=>{
+            console.log('connected')
+            setInterviewStarted(true)
+            playAudio()
+        })
+
         socketConnection.on("streamBack", (audioData: any) => {
             // console.log(audioData)
             queueAudioData(audioData);
@@ -33,7 +49,6 @@ const MyPage = () => {
 
     const handleSubmit = (data: { name: string; email: string }) => {
         console.log("Submitted Data:", data);
-        setInterviewStarted(true)
         setDetails({...data})
         startConnection()
     };
@@ -177,10 +192,6 @@ const MyPage = () => {
           const chunk = audioQueueRef.current.shift();
           sourceBufferRef.current.appendBuffer(chunk);
       };
-    
-      useEffect(()=>{
-        playSynthesizedAudio('TARUN')
-      },[]);
       
       const playSynthesizedAudio = async (text: string) => {
         try {
