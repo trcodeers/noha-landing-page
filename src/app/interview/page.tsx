@@ -179,7 +179,31 @@ const MyPage = () => {
           sourceBufferRef.current.appendBuffer(chunk);
       };
     
+      const playSynthesizedAudio = async (text: string) => {
+        try {
+          const response = await fetch("http://35.244.0.35:5000/synthesize", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text }),
+          });
       
+          if (!response.ok) {
+            throw new Error("Failed to fetch audio");
+          }
+      
+          const audioBlob = await response.blob();
+          const audioUrl = URL.createObjectURL(audioBlob);
+          
+          const audio = new Audio(audioUrl);
+          audio.play();
+        } catch (error) {
+          console.error("Error playing audio:", error);
+        }
+      };
+      
+
     return (
         <>
         <audio ref={audioPlayerRef} controls style={{ display: "none" }}></audio>
