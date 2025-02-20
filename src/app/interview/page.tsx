@@ -2,7 +2,8 @@
 import Feedback from "@/components/feedback";
 import InterviewDetails from "@/components/InterviewDetails";
 import LiveInterview from "@/components/LiveInterview";
-import { useRef, useState } from "react";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 const MyPage = () => {
@@ -68,10 +69,8 @@ const MyPage = () => {
             console.warn("Microphone permission query not supported, trying direct access.");
             return true;
         }
-    };
-    
-    
-    
+      };
+      
       const startRecording = async () => {
           const hasPermission = await checkMicrophonePermission();
           if (!hasPermission) return;
@@ -179,21 +178,17 @@ const MyPage = () => {
           sourceBufferRef.current.appendBuffer(chunk);
       };
     
+      useEffect(()=>{
+        playSynthesizedAudio('TARUN')
+      },[]);
+      
       const playSynthesizedAudio = async (text: string) => {
         try {
-          const response = await fetch("http://35.244.0.35:5000/synthesize", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ text }),
+          const response = await axios.post("http://35.244.0.35:5000/synthesize", { text }, {
+            responseType: "blob",
           });
       
-          if (!response.ok) {
-            throw new Error("Failed to fetch audio");
-          }
-      
-          const audioBlob = await response.blob();
+          const audioBlob = new Blob([response.data], { type: "audio/wav" });
           const audioUrl = URL.createObjectURL(audioBlob);
           
           const audio = new Audio(audioUrl);
@@ -202,7 +197,6 @@ const MyPage = () => {
           console.error("Error playing audio:", error);
         }
       };
-      
 
     return (
         <>
