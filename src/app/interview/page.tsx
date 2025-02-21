@@ -26,21 +26,37 @@ const MyPage = () => {
 
     const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
-        const greetMsg: string = `Hi ${userDetails.name}, I'm Noha. I'll be conducting your interview today. Let's get started with your first question. Please introduce yourself`
+        const greetMsg: string = `Hi ${userDetails.name}, `
         
         socketConnection.on("connect", () => {
             console.log('connected')
             setInterviewStarted(true);
-            setChats([
-                { name: "Noha AI", message: greetMsg },
-                ...chats
-            ])
+        
+            updateChats(greetMsg)
             speakText(greetMsg);
     
         });
 
+        socketConnection.on("streamBack",(data)=>{
+            console.log('RECEVED---------------------')
+            console.log(chats)
+            console.log(
+                { name: "Noha AI", message: data },
+                ...chats
+            )
+            updateChats(data)
+            speakText(data)
+        })
         setUserSocket(socketConnection);
     };
+
+    const updateChats = (msg: string, sender= "Noha AI") => {
+        setChats((prevChats) => [
+            { name: sender, message: msg },
+            ...prevChats,
+        ]);
+    };
+    
 
     const speakText = (text: string): void => {
         if (!window.speechSynthesis) {
@@ -109,10 +125,8 @@ const MyPage = () => {
         console.log(transcribedText)
         if (transcribedText.trim() !== "") {
             console.log('COMPLETED')
-            
-            userSocket.emit('STOP', 'HELLO MESSAGE')
-
-            setChats((prevChats) => [ ...prevChats, { name: "Candidate", message: transcribedText } ]);
+            userSocket.emit('STOP', transcribedText)
+            updateChats(transcribedText, "Candidate")
             setTranscribedText("");
         }
     }, [transcribedText])
