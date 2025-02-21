@@ -37,6 +37,11 @@ const MyPage = () => {
     
         });
 
+        socketConnection.on("disconnect", () => {
+            console.log("Client disconnected from server");
+        });
+        
+
         socketConnection.on("streamBack",(data)=>{
             console.log('RECEVED---------------------')
             console.log(chats)
