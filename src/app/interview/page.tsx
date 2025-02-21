@@ -2,18 +2,10 @@
 import Feedback from "@/components/feedback";
 import InterviewDetails from "@/components/InterviewDetails";
 import LiveInterview from "@/components/LiveInterview";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 const MyPage = () => {
-
-    const playAudio = () => {
-        const audio = new Audio('output.wav'); // Public folder files are served from the root
-        audio.play()
-          .then(() => console.log("Audio playing..."))
-          .catch(error => console.error("Error playing audio:", error));
-      };
 
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false)
     const [details, setDetails] = useState({} as any)
