@@ -83,6 +83,7 @@ const MyPage = () => {
                     finalTranscript += event.results[i][0].transcript + " ";
                 }
             }
+            console.log('finalTranscript', finalTranscript)
             setTranscribedText(finalTranscript);
         };
 
@@ -97,13 +98,15 @@ const MyPage = () => {
         if (recognitionRef.current) {
             recognitionRef.current.stop();
         }
+    };
 
+    useEffect(()=>{
         console.log(transcribedText)
         if (transcribedText.trim() !== "") {
             setChats((prevChats) => [ ...prevChats, { name: "Candidate", message: transcribedText } ]);
             setTranscribedText("");
         }
-    };
+    }, [transcribedText])
 
     return (
         <>
