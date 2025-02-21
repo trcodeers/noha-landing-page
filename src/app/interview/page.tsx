@@ -109,6 +109,9 @@ const MyPage = () => {
         console.log(transcribedText)
         if (transcribedText.trim() !== "") {
             console.log('COMPLETED')
+            
+            userSocket.emit('STOP', 'HELLO MESSAGE')
+
             setChats((prevChats) => [ ...prevChats, { name: "Candidate", message: transcribedText } ]);
             setTranscribedText("");
         }
