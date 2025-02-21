@@ -208,23 +208,6 @@ const MyPage = () => {
           sourceBufferRef.current.appendBuffer(chunk);
       };
 
-
-      const playSynthesizedAudio = async (text: string) => {
-        try {
-          const response = await axios.post("http://35.244.0.35:5000/synthesize", { text }, {
-            responseType: "blob",
-          });
-      
-          const audioBlob = new Blob([response.data], { type: "audio/wav" });
-          const audioUrl = URL.createObjectURL(audioBlob);
-          
-          const audio = new Audio(audioUrl);
-          audio.play();
-        } catch (error) {
-          console.error("Error playing audio:", error);
-        }
-      };
-
     return (
         <>
         <audio ref={audioPlayerRef} controls style={{ display: "none" }}></audio>
