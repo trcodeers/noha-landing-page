@@ -29,12 +29,13 @@ const MyPage = () => {
         const socketConnection = io(backendServiceLink + "/guest", {
             transports: ["websocket"],
         });
+        speakText(`hi ${userDetails.name} I'm Noha, I'll be conducting your interview today. Let's get started with your first question: Find an index in an array where the sum of elements to the left equals the sum to the right`)
+
 
         socketConnection.on('connect', ()=>{
             console.log('connected')
             setInterviewStarted(true)
             console.log(details)
-            playSynthesizedAudio(`hi ${userDetails.name} I'm Noha, I'll be conducting your interview today. Let's get started with your first question: Find an index in an array where the sum of elements to the left equals the sum to the right`)
         })
 
         socketConnection.on("streamBack", (audioData: any) => {
@@ -44,6 +45,21 @@ const MyPage = () => {
 
         setUserSocket(socketConnection);
     };
+
+    const speakText = (text: string): void => {
+        if (!window.speechSynthesis) {
+          console.error("Speech synthesis is not supported in this browser.");
+          return;
+        }
+      
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-IN"; // You can change the language
+        utterance.rate = 1; // Adjust speed (0.1 to 10, 1 is normal)
+        utterance.pitch = 1; // Adjust pitch (0 to 2)
+        
+        window.speechSynthesis.speak(utterance);
+    };
+            
 
     const handleSubmit = (data: { name: string; email: string }) => {
         console.log("Submitted Data:", data);
