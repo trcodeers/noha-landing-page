@@ -26,7 +26,7 @@ const MyPage = () => {
 
     const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
-        const greetMsg: string = `Hi ${userDetails.name}, `
+        const greetMsg: string = `Hi ${userDetails.name}, I am Noha an AI interviewer. I am here to conduct your interview today. Please start by introducing yourself.`
         
         socketConnection.on("connect", () => {
             console.log('connected')
