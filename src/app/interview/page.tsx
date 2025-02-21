@@ -8,12 +8,6 @@ import { io } from "socket.io-client";
 
 const MyPage = () => {
 
-    const playAudio = () => {
-        const audio = new Audio('output.wav'); // Public folder files are served from the root
-        audio.play()
-          .then(() => console.log("Audio playing..."))
-          .catch(error => console.error("Error playing audio:", error));
-      };
 
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false)
     const [details, setDetails] = useState({} as any)
@@ -25,6 +19,17 @@ const MyPage = () => {
         );
     const [userSocket, setUserSocket] = useState<any>(null);
     
+    const [chats, setChats] = useState([
+        { name: "Noha AI", message: "Hello! Welcome to your interview. Can you introduce yourself?" },
+        { name: "Candidate", message: "Hi, my name is Alex, and I have five years of experience in frontend development." },
+        { name: "Noha AI", message: "Great! Can you tell me about a challenging project you've worked on recently?" },
+        { name: "Candidate", message: "Sure! I recently built a scalable design system using React and Tailwind CSS for a SaaS platform." },
+        { name: "Noha AI", message: "That sounds interesting. How did you handle component reusability?" },
+        { name: "Candidate", message: "I created atomic components and used a central theme provider to ensure consistency across the app." },
+        { name: "Noha AI", message: "Impressive! How do you optimize performance in a React application?" },
+        { name: "Candidate", message: "I use React.memo, lazy loading, and optimize re-renders with useCallback and useMemo." }
+    ]);
+
     const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink + "/guest", {
             transports: ["websocket"],
@@ -39,8 +44,6 @@ const MyPage = () => {
         })
 
         socketConnection.on("streamBack", (audioData: any) => {
-            // console.log(audioData)
-            queueAudioData(audioData);
         });
 
         setUserSocket(socketConnection);
@@ -81,8 +84,6 @@ const MyPage = () => {
       const audioTrackRef = useRef<any>(null);
       const audioPlayerRef = useRef<any>(null);
       const mediaSourceRef = useRef<any>(null);
-      const sourceBufferRef = useRef<any>(null);
-      const audioQueueRef = useRef<any>([]);
       const [isRecording, setIsRecording] = useState(false);
       const [isSpeaking, setIsSpeaking] = useState(false);
       
@@ -152,85 +153,15 @@ const MyPage = () => {
             
         }
       };
-    
-      /** ✅ Handles continuous streaming by queueing and appending chunks */
-      const queueAudioData = (audioData: any) => {
-        try {
-   
-          if (!(audioData instanceof Uint8Array || audioData instanceof ArrayBuffer)) {
-              console.error("Invalid audio data received:", audioData);
-              return;
-          }
-    
-          const uint8Array = new Uint8Array(audioData);
-          audioQueueRef.current.push(uint8Array);
-    
-          if (!mediaSourceRef.current || mediaSourceRef.current.readyState !== "open") {
-              initializeMediaSource();
-          } else {
-              appendAudioBuffer();
-          }
-                   
-        } catch (error) {
-            
-        }
-      };
-    
-      /** ✅ Initializes MediaSource for streaming playback */
-      const initializeMediaSource = () => {
-          if (!audioPlayerRef.current) return;
-    
-          mediaSourceRef.current = new MediaSource();
-          audioPlayerRef.current.src = URL.createObjectURL(mediaSourceRef.current);
-    
-          mediaSourceRef.current.addEventListener("sourceopen", () => {
-              const mediaSource = mediaSourceRef.current;
-              if (!mediaSource) return;
-    
-              sourceBufferRef.current = mediaSource.addSourceBuffer('audio/webm; codecs="opus"');
-    
-              sourceBufferRef.current.addEventListener("updateend", appendAudioBuffer);
-    
-              appendAudioBuffer();
-          });
-    
-          audioPlayerRef.current.play().catch((err: any) => console.log());
-      };
-    
-      /** ✅ Appends buffered chunks to SourceBuffer */
-      const appendAudioBuffer = () => {
-          if (!sourceBufferRef.current || sourceBufferRef.current.updating || audioQueueRef.current.length === 0) {
-              return;
-          }
-    
-          const chunk = audioQueueRef.current.shift();
-          sourceBufferRef.current.appendBuffer(chunk);
-      };
 
-
-      const playSynthesizedAudio = async (text: string) => {
-        try {
-          const response = await axios.post("http://35.244.0.35:5000/synthesize", { text }, {
-            responseType: "blob",
-          });
       
-          const audioBlob = new Blob([response.data], { type: "audio/wav" });
-          const audioUrl = URL.createObjectURL(audioBlob);
-          
-          const audio = new Audio(audioUrl);
-          audio.play();
-        } catch (error) {
-          console.error("Error playing audio:", error);
-        }
-      };
-
     return (
         <>
         <audio ref={audioPlayerRef} controls style={{ display: "none" }}></audio>
         {!callended && (!interviewStarted ? 
             <InterviewDetails onSubmit={handleSubmit} />
                 :
-            <LiveInterview name={details.name} onCancelCall={onCancelCall} userSocket={userSocket} isMicOn={isMicOn} startRecording={startRecording} stopRecording={stopRecording} isRecording={isRecording} />)
+            <LiveInterview chats={chats} name={details.name} onCancelCall={onCancelCall} userSocket={userSocket} isMicOn={isMicOn} startRecording={startRecording} stopRecording={stopRecording} isRecording={isRecording} />)
         }
         {
             callended === true && <Feedback/>
