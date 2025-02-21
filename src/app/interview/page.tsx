@@ -29,6 +29,7 @@ const MyPage = () => {
         const greetMsg: string = `Hi ${userDetails.name}, I'm Noha. I'll be conducting your interview today. Let's get started with your first question. Please introduce yourself`
         
         socketConnection.on("connect", () => {
+            console.log('connected')
             setInterviewStarted(true);
             setChats([
                 { name: "Noha AI", message: greetMsg },
@@ -107,6 +108,7 @@ const MyPage = () => {
     useEffect(()=>{
         console.log(transcribedText)
         if (transcribedText.trim() !== "") {
+            console.log('COMPLETED')
             setChats((prevChats) => [ ...prevChats, { name: "Candidate", message: transcribedText } ]);
             setTranscribedText("");
         }
