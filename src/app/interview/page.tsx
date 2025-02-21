@@ -10,7 +10,10 @@ const MyPage = () => {
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
     const [details, setDetails] = useState({} as any);
     const [callEnded, setCallEnded] = useState(false);
-    const [backendServiceLink] = useState("http://localhost:5000");
+    const [backendServiceLink] = useState(
+        // "http://localhost:5000"
+        "http://34.47.237.162:8000"    
+        );
     const [userSocket, setUserSocket] = useState<any>(null);
 
     const [chats, setChats] = useState<Array<any>>([]);
@@ -22,16 +25,17 @@ const MyPage = () => {
     const recognitionRef = useRef<any>(null);
 
     const startConnection = async (userDetails: any) => {
-        const socketConnection = io(backendServiceLink + "/guest", { transports: ["websocket"] });
+        const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
         const greetMsg: string = `Hi ${userDetails.name}, I'm Noha. I'll be conducting your interview today. Let's get started with your first question. Please introduce yourself`
-        setChats([
-            { name: "Noha AI", message: greetMsg },
-            ...chats
-        ])
-        speakText(greetMsg);
-
+        
         socketConnection.on("connect", () => {
             setInterviewStarted(true);
+            setChats([
+                { name: "Noha AI", message: greetMsg },
+                ...chats
+            ])
+            speakText(greetMsg);
+    
         });
 
         setUserSocket(socketConnection);
