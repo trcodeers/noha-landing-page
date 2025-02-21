@@ -21,21 +21,22 @@ const MyPage = () => {
     const [callended, setCallEnded] = useState(false)
 
     const [backendServiceLink] = useState(
-        "http://localhost:5000"
+        // "http://localhost:5000"
+        "http://34.47.237.162:8000"
         );
     const [userSocket, setUserSocket] = useState<any>(null);
     
     const startConnection = async (userDetails: any) => {
-        const socketConnection = io(backendServiceLink + "/guest", {
+        const socketConnection = io(backendServiceLink, {
             transports: ["websocket"],
         });
-        speakText(`hi ${userDetails.name} I'm Noha, I'll be conducting your interview today. Let's get started with your first question: Find an index in an array where the sum of elements to the left equals the sum to the right`)
 
 
         socketConnection.on('connect', ()=>{
             console.log('connected')
             setInterviewStarted(true)
             console.log(details)
+            speakText(`hi ${userDetails.name} I'm Noha, I'll be conducting your interview today. Let's get started with your first question: Find an index in an array where the sum of elements to the left equals the sum to the right`)
         })
 
         socketConnection.on("streamBack", (audioData: any) => {
