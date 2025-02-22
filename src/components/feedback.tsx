@@ -2,16 +2,15 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
 
-const Feedback = () => {
+const Feedback = ({ sendFeedback } : any) => {
   const [rating, setRating] = useState<number>(0);
 
   const handleRating = (selectedRating: number) => {
     setRating(selectedRating);
   };
 
-  const handleSubmit = () => {
-    console.log("Feedback submitted with rating:", rating);
-    // Call API or handle submission logic here
+  const handleSubmit = async() => {
+    sendFeedback(rating)
   };
 
   return (

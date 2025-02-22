@@ -30,17 +30,16 @@ const MyPage = () => {
         
         socketConnection.on("connect", () => {
             console.log('connected')
+            
+            if(!interviewStarted) speakText(greetMsg);
             setInterviewStarted(true);
-        
             updateChats(greetMsg)
-            speakText(greetMsg);
     
         });
 
         socketConnection.on("disconnect", () => {
             console.log("Client disconnected from server");
         });
-        
 
         socketConnection.on("streamBack",(data)=>{
             console.log('RECEVED---------------------')
@@ -136,6 +135,17 @@ const MyPage = () => {
         }
     }, [transcribedText])
 
+    const sendFeedback = async (rating: number) => {
+        try {
+          const response = await axios.post("http://localhost:5000/feedback", { rating });
+          console.log("Response:", response.data);
+          return response.data;
+        } catch (error: any) {
+          console.error("Error submitting feedback:", error.response ? error.response.data : error.message);
+          throw error;
+        }
+      };
+
     return (
         <>
             {!callEnded && (!interviewStarted ? (
@@ -152,7 +162,7 @@ const MyPage = () => {
                     isRecording={isRecording}
                 />
             ))}
-            {callEnded && <Feedback />}
+            {callEnded && <Feedback sendFeedback={sendFeedback} />}
         </>
     );
 };
