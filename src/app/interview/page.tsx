@@ -122,11 +122,6 @@ const MyPage = () => {
 
         if (recognitionRef.current) {
             recognitionRef.current.stop();
-
-            console.log('Stopped')
-            userSocket.emit('STOP', transcribedText)
-            updateChats(transcribedText, "Candidate")
-            setTranscribedText("");
         }
     };
 
