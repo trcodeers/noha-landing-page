@@ -26,7 +26,7 @@ const MyPage = () => {
 
     const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
-        const greetMsg: string = `Hi ${userDetails.name}`
+        const greetMsg: string = `Hi ${userDetails.name}, Find an index in an array where the sum of elements to the left equals the sum to the right.`
         
         socketConnection.on("connect", () => {
             console.log('connected')
