@@ -108,8 +108,8 @@ const MyPage = () => {
                     finalTranscript += event.results[i][0].transcript + " ";
                 }
             }
-            console.log('finalTranscript', finalTranscript)
-            setTranscribedText(finalTranscript);
+            console.log('finalTranscript', transcribedText + finalTranscript)
+            setTranscribedText((transcribedText) => transcribedText + finalTranscript);
         };
 
         recognitionRef.current = recognition;
@@ -122,16 +122,20 @@ const MyPage = () => {
 
         if (recognitionRef.current) {
             recognitionRef.current.stop();
+            console.log('COMPLETED', transcribedText)
+            userSocket.emit('STOP', transcribedText)
+            updateChats(transcribedText, "Candidate")
+            setTranscribedText("");
         }
     };
 
     useEffect(()=>{
         console.log(transcribedText)
         if (transcribedText.trim() !== "") {
-            console.log('COMPLETED')
-            userSocket.emit('STOP', transcribedText)
-            updateChats(transcribedText, "Candidate")
-            setTranscribedText("");
+            // console.log('COMPLETED')
+            // userSocket.emit('STOP', transcribedText)
+            // updateChats(transcribedText, "Candidate")
+            // setTranscribedText("");
         }
     }, [transcribedText])
 
