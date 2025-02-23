@@ -13,9 +13,11 @@ const MyPage = () => {
     const [backendServiceLink] = useState("http://34.47.237.162:8000");
     const [userSocket, setUserSocket] = useState<any>(null);
     const [chats, setChats] = useState<Array<any>>([]);
+    
     const [isMicOn, setIsMicOn] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [transcribedText, setTranscribedText] = useState("");
+    const [isProcessing, setIsProcessing] = useState(false); // NEW: Processing state
 
     const recognitionRef = useRef<any>(null);
 
@@ -24,7 +26,7 @@ const MyPage = () => {
         const greetMsg: string = `Hi ${userDetails.name}, Find an index in an array where the sum of elements to the left equals the sum to the right.`;
 
         socketConnection.on("connect", () => {
-            console.log('connected');
+            console.log('Connected');
             if (!interviewStarted) speakText(greetMsg);
             setInterviewStarted(true);
             updateChats(greetMsg);
@@ -35,7 +37,7 @@ const MyPage = () => {
         });
 
         socketConnection.on("streamBack", (data) => {
-            console.log('RECEIVED---------------------');
+            console.log('Received AI response');
             updateChats(data);
             speakText(data);
         });
@@ -78,6 +80,7 @@ const MyPage = () => {
     const startRecording = () => {
         setIsMicOn(true);
         setIsRecording(true);
+        setIsProcessing(true); // Show dot on mic icon
 
         if (!("webkitSpeechRecognition" in window)) {
             alert("Your browser does not support speech recognition. Please try Chrome.");
@@ -99,6 +102,11 @@ const MyPage = () => {
             setTranscribedText((prev) => prev + finalTranscript);
         };
 
+        recognition.onend = () => {
+            console.log("Recognition ended, processing final text...");
+            setIsProcessing(false); // Hide dot when processing is done
+        };
+
         recognitionRef.current = recognition;
         recognition.start();
     };
@@ -113,13 +121,13 @@ const MyPage = () => {
     };
 
     useEffect(() => {
-        if (!isRecording && transcribedText.trim() !== "") {
-            console.log('EMITTING TRANSCRIBED TEXT:', transcribedText);
+        if (!isRecording && !isProcessing && transcribedText.trim() !== "") {
+            console.log('Emitting transcribed text:', transcribedText);
             userSocket?.emit('STOP', transcribedText);
             updateChats(transcribedText, "Candidate");
             setTranscribedText(""); // Reset after emitting
         }
-    }, [isRecording]);
+    }, [isRecording, isProcessing]);
 
     const sendFeedback = async (rating: number) => {
         try {
@@ -146,6 +154,7 @@ const MyPage = () => {
                     startRecording={startRecording}
                     stopRecording={stopRecording}
                     isRecording={isRecording}
+                    isProcessing={isProcessing} // Pass processing state to show dot on mic
                 />
             ))}
             {callEnded && <Feedback sendFeedback={sendFeedback} />}
