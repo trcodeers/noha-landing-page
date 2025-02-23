@@ -13,18 +13,21 @@ const MyPage = () => {
     const [backendServiceLink] = useState("http://34.47.237.162:8000");
     const [userSocket, setUserSocket] = useState<any>(null);
     const [chats, setChats] = useState<Array<any>>([]);
+
     const [isMicOn, setIsMicOn] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [isTranscribing, setIsTranscribing] = useState(false);
     const [transcribedText, setTranscribedText] = useState("");
 
     const recognitionRef = useRef<any>(null);
+    const fullTranscriptRef = useRef<string>(""); // Stores the full transcript
 
     const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
         const greetMsg: string = `Hi ${userDetails.name}, Find an index in an array where the sum of elements to the left equals the sum to the right.`;
 
         socketConnection.on("connect", () => {
-            console.log('connected');
+            console.log('Connected');
             if (!interviewStarted) speakText(greetMsg);
             setInterviewStarted(true);
             updateChats(greetMsg);
@@ -35,7 +38,7 @@ const MyPage = () => {
         });
 
         socketConnection.on("streamBack", (data) => {
-            console.log('RECEIVED---------------------');
+            console.log('Received AI response');
             updateChats(data);
             speakText(data);
         });
@@ -78,6 +81,9 @@ const MyPage = () => {
     const startRecording = () => {
         setIsMicOn(true);
         setIsRecording(true);
+        setIsTranscribing(false);
+        setTranscribedText(""); // Reset previous transcript
+        fullTranscriptRef.current = ""; // Reset full transcript storage
 
         if (!("webkitSpeechRecognition" in window)) {
             alert("Your browser does not support speech recognition. Please try Chrome.");
@@ -86,7 +92,7 @@ const MyPage = () => {
 
         const recognition = new (window as any).webkitSpeechRecognition();
         recognition.continuous = true;
-        recognition.interimResults = true;
+        recognition.interimResults = false; // Store only final results
         recognition.lang = "en-US";
 
         recognition.onresult = (event: any) => {
@@ -96,7 +102,7 @@ const MyPage = () => {
                     finalTranscript += event.results[i][0].transcript + " ";
                 }
             }
-            setTranscribedText((prev) => prev + finalTranscript);
+            fullTranscriptRef.current += finalTranscript; // Append to full transcript
         };
 
         recognitionRef.current = recognition;
@@ -104,8 +110,11 @@ const MyPage = () => {
     };
 
     const stopRecording = () => {
+        if (!isRecording) return; // Prevent double calls
+
         setIsRecording(false);
         setIsMicOn(false);
+        setIsTranscribing(true); // Show "Transcribing..." message
 
         if (recognitionRef.current) {
             recognitionRef.current.stop();
@@ -113,13 +122,19 @@ const MyPage = () => {
     };
 
     useEffect(() => {
-        if (!isRecording && transcribedText.trim() !== "") {
-            console.log('EMITTING TRANSCRIBED TEXT:', transcribedText);
-            userSocket?.emit('STOP', transcribedText);
-            updateChats(transcribedText, "Candidate");
-            setTranscribedText(""); // Reset after emitting
+        if (!isRecording && isTranscribing) {
+            setTimeout(() => {
+                const finalText = fullTranscriptRef.current.trim();
+                if (finalText !== "") {
+                    console.log('Final Transcribed Text:', finalText);
+                    userSocket?.emit('STOP', finalText);
+                    updateChats(finalText, "Candidate");
+                }
+                setTranscribedText(finalText);
+                setIsTranscribing(false); // Hide "Transcribing..." message
+            }, 1000); // Simulate processing time
         }
-    }, [isRecording]);
+    }, [isTranscribing]);
 
     const sendFeedback = async (rating: number) => {
         try {
@@ -146,6 +161,7 @@ const MyPage = () => {
                     startRecording={startRecording}
                     stopRecording={stopRecording}
                     isRecording={isRecording}
+                    isTranscribing={isTranscribing} // Pass to UI for "Transcribing..."
                 />
             ))}
             {callEnded && <Feedback sendFeedback={sendFeedback} />}
