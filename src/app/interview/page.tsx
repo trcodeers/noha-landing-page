@@ -10,14 +10,9 @@ const MyPage = () => {
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
     const [details, setDetails] = useState({} as any);
     const [callEnded, setCallEnded] = useState(false);
-    const [backendServiceLink] = useState(
-        // "http://localhost:5000"
-        "http://34.47.237.162:8000"    
-        );
+    const [backendServiceLink] = useState("http://34.47.237.162:8000");
     const [userSocket, setUserSocket] = useState<any>(null);
-
     const [chats, setChats] = useState<Array<any>>([]);
-
     const [isMicOn, setIsMicOn] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [transcribedText, setTranscribedText] = useState("");
@@ -26,41 +21,34 @@ const MyPage = () => {
 
     const startConnection = async (userDetails: any) => {
         const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
-        const greetMsg: string = `Hi ${userDetails.name}, Find an index in an array where the sum of elements to the left equals the sum to the right.`
-        
+        const greetMsg: string = `Hi ${userDetails.name}, Find an index in an array where the sum of elements to the left equals the sum to the right.`;
+
         socketConnection.on("connect", () => {
-            console.log('connected')
-            
-            if(!interviewStarted) speakText(greetMsg);
+            console.log('connected');
+            if (!interviewStarted) speakText(greetMsg);
             setInterviewStarted(true);
-            updateChats(greetMsg)
-    
+            updateChats(greetMsg);
         });
 
         socketConnection.on("disconnect", () => {
             console.log("Client disconnected from server");
         });
 
-        socketConnection.on("streamBack",(data)=>{
-            console.log('RECEVED---------------------')
-            console.log(chats)
-            console.log(
-                { name: "Noha AI", message: data },
-                ...chats
-            )
-            updateChats(data)
-            speakText(data)
-        })
+        socketConnection.on("streamBack", (data) => {
+            console.log('RECEIVED---------------------');
+            updateChats(data);
+            speakText(data);
+        });
+
         setUserSocket(socketConnection);
     };
 
-    const updateChats = (msg: string, sender= "Noha AI") => {
+    const updateChats = (msg: string, sender = "Noha AI") => {
         setChats((prevChats) => [
             { name: sender, message: msg },
             ...prevChats,
         ]);
     };
-    
 
     const speakText = (text: string): void => {
         if (!window.speechSynthesis) {
@@ -108,8 +96,7 @@ const MyPage = () => {
                     finalTranscript += event.results[i][0].transcript + " ";
                 }
             }
-            console.log('finalTranscript', transcribedText + finalTranscript)
-            setTranscribedText(finalTranscript);
+            setTranscribedText((prev) => prev + finalTranscript);
         };
 
         recognitionRef.current = recognition;
@@ -122,33 +109,28 @@ const MyPage = () => {
 
         if (recognitionRef.current) {
             recognitionRef.current.stop();
-            // console.log('COMPLETED', transcribedText)
-            // userSocket.emit('STOP', transcribedText)
-            // updateChats(transcribedText, "Candidate")
-            // setTranscribedText("");
         }
     };
 
-    useEffect(()=>{
-        console.log(transcribedText)
-        if (transcribedText.trim() !== "") {
-            console.log('COMPLETED')
-            userSocket.emit('STOP', transcribedText)
-            updateChats(transcribedText, "Candidate")
-            setTranscribedText("");
+    useEffect(() => {
+        if (!isRecording && transcribedText.trim() !== "") {
+            console.log('EMITTING TRANSCRIBED TEXT:', transcribedText);
+            userSocket?.emit('STOP', transcribedText);
+            updateChats(transcribedText, "Candidate");
+            setTranscribedText(""); // Reset after emitting
         }
-    }, [transcribedText])
+    }, [isRecording]);
 
     const sendFeedback = async (rating: number) => {
         try {
-          const response = await axios.post("http://localhost:5000/feedback", { rating });
-          console.log("Response:", response.data);
-          return response.data;
+            const response = await axios.post("http://localhost:5000/feedback", { rating });
+            console.log("Response:", response.data);
+            return response.data;
         } catch (error: any) {
-          console.error("Error submitting feedback:", error.response ? error.response.data : error.message);
-          throw error;
+            console.error("Error submitting feedback:", error.response ? error.response.data : error.message);
+            throw error;
         }
-      };
+    };
 
     return (
         <>
