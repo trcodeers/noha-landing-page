@@ -10,7 +10,7 @@ const MyPage = () => {
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
     const [details, setDetails] = useState({} as any);
     const [callEnded, setCallEnded] = useState(false);
-    const [backendServiceLink] = useState("http://34.47.237.162:8000");
+    const [backendServiceLink] = useState("http://34.47.171.19");
     const [userSocket, setUserSocket] = useState<any>(null);
     const [chats, setChats] = useState<Array<any>>([]);
     
@@ -22,7 +22,7 @@ const MyPage = () => {
     const recognitionRef = useRef<any>(null);
 
     const startConnection = async (userDetails: any) => {
-        const socketConnection = io(backendServiceLink, { transports: ["websocket"] });
+        const socketConnection = io(backendServiceLink + '/guest', { transports: ["websocket"] });
         const greetMsg: string = `Hi ${userDetails.name}, Find an index in an array where the sum of elements to the left equals the sum to the right.`;
 
         socketConnection.on("connect", () => {
