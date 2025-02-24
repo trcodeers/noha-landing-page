@@ -2,6 +2,7 @@
 
 import AnimatedText from "@/components/AnimatedText";
 import FrontPage from "@/components/FrontPage";
+import FrontPage2 from "@/components/FrontPage2";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -39,7 +40,7 @@ export default function Home() {
           />
 
         }
-      {screen === 3 && <FrontPage />}
+      {screen === 3 && <FrontPage2 />}
     </div>
   );
 }
