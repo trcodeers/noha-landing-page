@@ -79,13 +79,16 @@ const Section1: React.FC = () => {
           {/* Buttons */}
           <div className="mt-6 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 text-center md:text-left">
             <Link href={"/interview"}>
-              <button className="px-8 py-3 text-black font-semibold rounded-full bg-gradient-to-r from-[#77FFF1] to-[#0B9284] ">
+              {/* <button className="px-8 py-3 text-black font-semibold rounded-full bg-gradient-to-r from-[#77FFF1] to-[#0B9284] ">
                 Try Noha
+              </button> */}
+            </Link>
+            <Link href={"https://www.youtube.com/watch?v=D_RWdG1eIAc"}>
+              <button className="px-6 py-3 border border-[#77FFF1] text-white rounded-full">
+                Watch a demo
               </button>
             </Link>
-            <button className="px-6 py-3 border border-[#77FFF1] text-white rounded-full">
-              Watch a demo
-            </button>
+            
           </div>
         </div>
         <div className="hidden md:block w-72 h-72 bg-[#16073D] rounded-full"></div>

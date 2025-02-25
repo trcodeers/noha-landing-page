@@ -10,7 +10,11 @@ const MyPage = () => {
     const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
     const [details, setDetails] = useState({} as any);
     const [callEnded, setCallEnded] = useState(false);
-    const [backendServiceLink] = useState("http://34.47.171.19");
+    const [backendServiceLink] = useState(
+        // "http://34.47.171.19"
+        // "http://localhost:5000"
+        "https://apis.noha.ai"
+        );
     const [userSocket, setUserSocket] = useState<any>(null);
     const [chats, setChats] = useState<Array<any>>([]);
     
