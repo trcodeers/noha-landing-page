@@ -3,6 +3,7 @@ import Feedback from "@/components/feedback";
 import InterviewDetails from "@/components/InterviewDetails";
 import LiveInterview from "@/components/LiveInterview";
 import axios from "axios";
+import { data } from "framer-motion/client";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -12,8 +13,8 @@ const MyPage = () => {
     const [callEnded, setCallEnded] = useState(false);
     const [backendServiceLink] = useState(
         // "http://34.47.171.19"
-        // "http://localhost:5000"
-        "https://apis.noha.ai"
+        "http://localhost:2000"
+        // "https://apis.noha.ai"
         );
     const [userSocket, setUserSocket] = useState<any>(null);
     const [chats, setChats] = useState<Array<any>>([]);
@@ -40,8 +41,8 @@ const MyPage = () => {
             console.log("Client disconnected from server");
         });
 
-        socketConnection.on("streamBack", (data) => {
-            console.log('Received AI response');
+        socketConnection.on("chat", (data: any) => {
+            console.log('Received AI response', data);
             updateChats(data);
             speakText(data);
         });
@@ -127,7 +128,7 @@ const MyPage = () => {
     useEffect(() => {
         if (!isRecording && !isProcessing && transcribedText.trim() !== "") {
             console.log('Emitting transcribed text:', transcribedText);
-            userSocket?.emit('STOP', transcribedText);
+            userSocket?.emit('chat', transcribedText);
             updateChats(transcribedText, "Candidate");
             setTranscribedText(""); // Reset after emitting
         }
