@@ -52,7 +52,9 @@ const MyPage = () => {
     const startConnection2 = async (userDetails: any) => {
         try {
             const res = await axios.get(`${backendServiceLink}/connect`);
-            console.log('startConnection2', res)
+            const res2 = await axios.post(`${backendServiceLink}/initialize`);
+            console.log('start connection', res)
+            console.log('initialize', res2)
             setInterviewStarted(true);
             const greetMsg = `Hello ${userDetails.name},, I'm Noha, I'll be conducting your interview today. Let's get started with your first question: Find an index in an array where the sum of elements to the left equals the sum to the right`
             updateChats(greetMsg);
