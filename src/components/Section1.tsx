@@ -92,10 +92,10 @@ const Section1: React.FC = () => {
         </div>
         <div className="hidden md:block w-72 h-72 bg-[#16073D] rounded-full"></div>
       </div>
-      <div className="relative h-screen w-full">
+      <div className="absolute top-[44%] left-[45%]">
   <Link
     href={"https://www.youtube.com/watch?v=D_RWdG1eIAc"}
-    className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    className=""
   >
     <button className="px-6 py-3 border border-[#77FFF1] text-white rounded-full">
       Watch a demo
